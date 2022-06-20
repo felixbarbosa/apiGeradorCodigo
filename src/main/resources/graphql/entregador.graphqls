@@ -1,0 +1,25 @@
+type Entregador {
+        id: Int,
+        data: String!,
+        hora: String,
+        turno: String,
+        local: String!,
+        codigo: String!,
+        visto: Int!
+}
+input EntregadorInput {
+        id: Int,
+        data: String,
+        hora: String,
+        turno: String,
+        local: String,
+        codigo: String,
+        visto: Int!
+}
+extend type Query {
+        entregadores:[Entregador]!
+}
+
+extend type Mutation{
+        salvarEntregador(entregador:EntregadorInput!): Entregador!    
+}
