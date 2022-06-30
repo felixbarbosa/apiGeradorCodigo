@@ -18,9 +18,15 @@ public class EntregadorGraphQl implements GraphQLQueryResolver, GraphQLMutationR
     private EntregadorRepository entregadorRepo;
 
 
-    public List<Entregador> entregadores(){
+    public List<Entregador> entregasPendentes(){
 
-        List<Entregador> lista = entregadorRepo.obterTodos();
+        List<Entregador> lista = entregadorRepo.obterEntregasPendentes();
+        return lista;    
+    }
+
+    public List<Entregador> entregasRealizadas(){
+
+        List<Entregador> lista = entregadorRepo.obterEntregasRealizadas();
         return lista;    
     }
 

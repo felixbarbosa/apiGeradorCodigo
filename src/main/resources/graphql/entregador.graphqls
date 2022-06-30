@@ -17,7 +17,8 @@ input EntregadorInput {
         visto: Int!
 }
 extend type Query {
-        entregadores:[Entregador]!
+        entregasPendentes:[Entregador]!
+        entregasRealizadas:[Entregador]!
 }
 
 extend type Mutation{

@@ -6,7 +6,9 @@ import com.geradorcodigo.geradorcodigo.Model.Entregador;
 
 public interface EntregadorRepository {
     
-    List<Entregador> obterTodos();
+    List<Entregador> obterEntregasPendentes();
+
+    List<Entregador> obterEntregasRealizadas();
 
     Entregador salvar(Entregador entregador);
 
