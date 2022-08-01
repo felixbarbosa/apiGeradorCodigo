@@ -1,0 +1,19 @@
+type Exercicio {
+        id: Int!,
+        descricao: String!,
+        musculo: Musculo!,
+}
+input ExercicioInput {
+        id: Int!,
+        descricao: String!,
+        musculo: Int!,
+}
+extend type Query {
+        obterExercicioPorId(id:Int!):Exercicio!
+        obterExerciciosPorMusculo(musculoId:Int!):[Exercicio]!
+        obterExercicios:[Exercicio]!
+}
+
+extend type Mutation{
+        salvarExercicio(exercicio:ExercicioInput!): Exercicio!    
+}

@@ -1,0 +1,30 @@
+type Aluno {
+        id: Int!,
+        nome: String!,
+        cpf: String!,
+        login: String!,
+        senha: String!,
+        sexo: String!,
+        email: String!,
+        idade: Int!,
+        personal: Personal!
+}
+input AlunoInput {
+        id: Int!,
+        nome: String!,
+        cpf: String!,
+        login: String!,
+        senha: String!,
+        sexo: String!,
+        email: String!,
+        idade: Int!,
+        personal: Int!
+}
+extend type Query {
+        obterAlunosProfessor(professorId: Int!):[Aluno]!
+        obterAlunoPorId(id: Int!):Aluno!
+}
+
+extend type Mutation{
+        salvarAluno(aluno:AlunoInput!): Aluno!    
+}

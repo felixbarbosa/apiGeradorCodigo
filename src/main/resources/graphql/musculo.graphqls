@@ -1,0 +1,12 @@
+type Musculo {
+        id: Int!,
+        descricao: String!,
+}
+input MusculoInput {
+        id: Int!,
+        descricao: String!,
+}
+extend type Query {
+        obterMusculos:[Musculo]!
+        obterMusculoPorId(id:Int!):Musculo!
+}

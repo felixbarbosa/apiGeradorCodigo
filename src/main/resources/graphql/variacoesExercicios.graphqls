@@ -1,0 +1,19 @@
+type VariacoesExercicios {
+        id: Int!,
+        descricao: String!,
+        musculo: Musculo!,
+        exercicio: Exercicio!,
+}
+input VariacoesExerciciosInput {
+        id: Int!,
+        descricao: String!,
+        musculo: Int!,
+        exercicio: Int!,
+}
+extend type Query {
+        obterVariacoes(exercicioId: Int!):[VariacoesExercicios]!
+}
+
+extend type Mutation{
+        salvarVariacoesExercicios(variacoesExercicios:VariacoesExerciciosInput!, exercicioId: Int!): VariacoesExercicios!    
+}

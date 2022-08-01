@@ -1,0 +1,12 @@
+type Objetivo {
+        id: Int!,
+        objetivo: String!,
+}
+input ObjetivoInput {
+        id: Int!,
+        objetivo: String!,
+}
+extend type Query {
+        obterObjetivos:[Objetivo]!
+        obterObjetivoPorId(id: Int!):Objetivo!
+}

@@ -1,0 +1,12 @@
+type DiaSemana {
+        id: Int!,
+        dia: String!,
+}
+input DiaSemanaInput {
+        id: Int!,
+        dia: String!
+}
+extend type Query {
+        obterDiasSemana:[DiaSemana]!
+        obterDiaSemanaPorId(id: Int!):DiaSemana!
+}

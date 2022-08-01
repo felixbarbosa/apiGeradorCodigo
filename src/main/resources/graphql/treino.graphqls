@@ -1,0 +1,35 @@
+type Treino {
+        id: Int,
+        nome: String,
+        exercicio: Exercicio,
+        aluno: Aluno,
+        repeticoes: String,
+        velocidade: String,
+        descanso: String
+        musculoAlvo: Musculo,
+        diaSemana: DiaSemana
+        series: String,
+        objetivo: Objetivo
+}
+input TreinoInput {
+        id: Int!,
+        nome: String!,
+        exercicio: Int!,
+        aluno: Int!,
+        repeticoes: String!,
+        velocidade: String!,
+        descanso: String!
+        musculoAlvo: Int!,
+        diaSemana: Int!
+        series: String!,
+        objetivo: Int!
+}
+extend type Query {
+        obterTreinoAluno(alunoId: Int!):[Treino]!
+        obterTreinoAlunoPorDia(alunoId: Int!, diaSemanaId: Int!):[Treino]!
+        obterTreinoAlunoPorMusculo(alunoId: Int!, musculoId: Int!):[Treino]!
+}
+
+extend type Mutation{
+        salvarTreino(Treino:TreinoInput!, alunoId: Int!): Treino!    
+}

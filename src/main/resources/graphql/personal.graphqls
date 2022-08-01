@@ -1,0 +1,30 @@
+type Personal {
+        id: Int!,
+        nome: String!,
+        cpf: String!,
+        login: String!,
+        senha: String!,
+        sexo: String!,
+        email: String!,
+        idade: Int!,
+        cref: String!
+}
+input PersonalInput {
+        id: Int!,
+        nome: String!,
+        cpf: String!,
+        login: String!,
+        senha: String!,
+        sexo: String!,
+        email: String!,
+        idade: Int!,
+        cref: String!
+}
+extend type Query {
+        obterTodosPersonais:[Personal]!
+        obterPersonalPorId(id:Int!):Personal!
+}
+
+extend type Mutation{
+        salvarPersonal(Personal:PersonalInput!): Personal!    
+}
