@@ -2,21 +2,22 @@ package com.geradorcodigo.geradorcodigo.Model;
 
 public class TreinoInput {
 
-        private Integer id;
+        private int id;
         private String nome;
-        private Integer exercicio;
-        private Integer aluno;
+        private int exercicio;
+        private int aluno;
         private String repeticoes;
         private String velocidade;
         private String descanso;
-        private Integer musculoAlvo;
-        private Integer diaSemana;
+        private int musculoAlvo;
+        private int diaSemana;
         private String series;
-        private Integer objetivo;
-        public Integer getId() {
+        private int objetivo;
+
+        public int getId() {
                 return id;
         }
-        public void setId(Integer id) {
+        public void setId(int id) {
                 this.id = id;
         }
         public String getNome() {
@@ -25,16 +26,16 @@ public class TreinoInput {
         public void setNome(String nome) {
                 this.nome = nome;
         }
-        public Integer getExercicio() {
+        public int getExercicio() {
                 return exercicio;
         }
-        public void setExercicio(Integer exercicio) {
+        public void setExercicio(int exercicio) {
                 this.exercicio = exercicio;
         }
-        public Integer getAluno() {
+        public int getAluno() {
                 return aluno;
         }
-        public void setAluno(Integer aluno) {
+        public void setAluno(int aluno) {
                 this.aluno = aluno;
         }
         public String getRepeticoes() {
@@ -55,16 +56,16 @@ public class TreinoInput {
         public void setDescanso(String descanso) {
                 this.descanso = descanso;
         }
-        public Integer getMusculoAlvo() {
+        public int getMusculoAlvo() {
                 return musculoAlvo;
         }
-        public void setMusculoAlvo(Integer musculoAlvo) {
+        public void setMusculoAlvo(int musculoAlvo) {
                 this.musculoAlvo = musculoAlvo;
         }
-        public Integer getDiaSemana() {
+        public int getDiaSemana() {
                 return diaSemana;
         }
-        public void setDiaSemana(Integer diaSemana) {
+        public void setDiaSemana(int diaSemana) {
                 this.diaSemana = diaSemana;
         }
         public String getSeries() {
@@ -73,10 +74,10 @@ public class TreinoInput {
         public void setSeries(String series) {
                 this.series = series;
         }
-        public Integer getObjetivo() {
+        public int getObjetivo() {
                 return objetivo;
         }
-        public void setObjetivo(Integer objetivo) {
+        public void setObjetivo(int objetivo) {
                 this.objetivo = objetivo;
         }
         
