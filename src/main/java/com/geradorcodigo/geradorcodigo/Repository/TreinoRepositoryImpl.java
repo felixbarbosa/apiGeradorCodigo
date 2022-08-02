@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import com.geradorcodigo.geradorcodigo.Model.DiaSemana;
 import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
 import com.geradorcodigo.geradorcodigo.Model.Treino;
@@ -17,12 +19,12 @@ import com.geradorcodigo.geradorcodigo.Model.Treino;
 @Repository
 public class TreinoRepositoryImpl implements TreinoRepository{
 
-    private static String SELECT_TREINO_ALUNO = "select mc_treino.nome, mc_musculo.descricao, mc_musculo.id as musculoId " 
+    private static String SELECT_TREINO_ALUNO = "select mc_treino.nome, mc_treino.diaSemana, mc_musculo.descricao, mc_musculo.id as musculoId " 
     + "from mc_treino "
     + "inner join mc_musculo "
     + "on mc_musculo.id = mc_treino.musculo "
     + "where mc_treino.aluno = ? "
-    + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id";
+    + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.diaSemana";
 
     private static String SELECT_TREINO_POR_DIA = "select mc_musculo.descricao as musculoAlvo, " 
     + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
@@ -50,6 +52,8 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     @Autowired
     private JdbcTemplate jbdcTemplate;
 
+    @Autowired
+    private DiaSemanaRepository diaSemanaRepo;
     
     public void setDataSource(DataSource dataSource){
         this.jbdcTemplate = new JdbcTemplate(dataSource);
@@ -80,14 +84,15 @@ public class TreinoRepositoryImpl implements TreinoRepository{
 
                 Treino treino = new Treino();
                 Musculo musculo = new Musculo();
+                DiaSemana diaSemana = new DiaSemana();
                 
                 //treino.setId(rs.getInt("id"));
 
                 //aluno = alunoRepo.obterAlunoPorId(rs.getInt("aluno"));
                 //treino.setAluno(aluno);
 
-                //diaSemana = diaSemanaRepo.obterDiaSemanaPorId(rs.getInt("diaSemana"));
-                //treino.setDiaSemana(diaSemana);
+                diaSemana = diaSemanaRepo.obterDiaSemanaPorId(rs.getInt("diaSemana"));
+                treino.setDiaSemana(diaSemana);
 
                 //musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
                 musculo.setId(rs.getInt("musculoId"));
@@ -98,7 +103,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 //treino.setExercicio(exercicio);
 
                 //treino.setDescanso(rs.getString("descanso"));
-                //treino.setNome(rs.getString("nome"));
+                treino.setNome(rs.getString("nome"));
 
                 //objetivo = objetivoRepo.obterObjetivoPorId(rs.getInt("objetivo"));
                 //treino.setObjetivo(objetivo);
