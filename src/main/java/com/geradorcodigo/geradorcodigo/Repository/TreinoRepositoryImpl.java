@@ -17,7 +17,8 @@ import com.geradorcodigo.geradorcodigo.Model.Treino;
 @Repository
 public class TreinoRepositoryImpl implements TreinoRepository{
 
-    private static String SELECT_TREINO_ALUNO = "select mc_treino.nome, mc_musculo.descricao from mc_treino "
+    private static String SELECT_TREINO_ALUNO = "select mc_treino.nome, mc_musculo.descricao, mc_musculo.id as musculoId " 
+    + "from mc_treino "
     + "inner join mc_musculo "
     + "on mc_musculo.id = mc_treino.musculo "
     + "where mc_treino.aluno = ? "
@@ -89,6 +90,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 //treino.setDiaSemana(diaSemana);
 
                 //musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
+                musculo.setId(rs.getInt("musculoId"));
                 musculo.setDescricao(rs.getString("descricao"));
                 treino.setMusculoAlvo(musculo);
 
