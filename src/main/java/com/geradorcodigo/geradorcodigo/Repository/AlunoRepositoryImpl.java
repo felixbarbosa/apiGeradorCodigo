@@ -22,8 +22,8 @@ public class AlunoRepositoryImpl implements AlunoRepository{
     "?";
     private static String SELECT_ALUNO_ID = "select * from mc_aluno where id = " +
     "?";
-    private static String INSERT = " insert into mc_aluno (nome, cpf, login, senha, sexo, idade, email) "
-            + " values (?, ?, ?, ?, ?, ?, ?) ";
+    private static String INSERT = " insert into mc_aluno (nome, cpf, login, senha, sexo, idade, email, personal) "
+            + " values (?, ?, ?, ?, ?, ?, ?, ?) ";
     //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
 
     @Autowired
@@ -40,7 +40,7 @@ public class AlunoRepositoryImpl implements AlunoRepository{
     public Aluno salvarAluno(Aluno aluno) {
 
         jbdcTemplate.update(INSERT, new Object[] {aluno.getNome(), aluno.getCpf(), aluno.getLogin(), aluno.getSenha(), 
-        aluno.getSexo(), aluno.getIdade(), aluno.getEmail()});
+        aluno.getSexo(), aluno.getIdade(), aluno.getEmail(), aluno.getPersonal().getId()});
 
         return aluno;
     }
