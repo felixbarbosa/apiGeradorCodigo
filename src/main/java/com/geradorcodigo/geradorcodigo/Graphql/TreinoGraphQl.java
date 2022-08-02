@@ -41,7 +41,7 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         return lista;    
     }
 
-    public Treino salvarTreino(TreinoInput treinoInput, int alunoId){
+    public Treino salvarTreino(TreinoInput treinoInput){
  
         Treino treino= new Treino();
         Aluno aluno = new Aluno();
