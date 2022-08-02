@@ -76,7 +76,7 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         treino.setVelocidade(treinoInput.getVelocidade());
 
         if(treino.getId() == 0){
-            treino = treinoRepo.inserirTreinoAluno(treino, alunoId);
+            treino = treinoRepo.inserirTreinoAluno(treino);
         }else{
             treino = treinoRepo.atualizar(treino);
         }
