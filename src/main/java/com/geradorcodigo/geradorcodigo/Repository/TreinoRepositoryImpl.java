@@ -14,17 +14,18 @@ import org.springframework.stereotype.Repository;
 import com.geradorcodigo.geradorcodigo.Model.DiaSemana;
 import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
+import com.geradorcodigo.geradorcodigo.Model.Objetivo;
 import com.geradorcodigo.geradorcodigo.Model.Treino;
 
 @Repository
 public class TreinoRepositoryImpl implements TreinoRepository{
 
-    private static String SELECT_TREINO_ALUNO = "select mc_treino.nome, mc_treino.\"diaSemana\", mc_musculo.descricao, mc_musculo.id as musculoId " 
+    private static String SELECT_TREINO_ALUNO = "select mc_treino.objetivo, mc_treino.nome, mc_treino.\"diaSemana\", mc_musculo.descricao, mc_musculo.id as musculoId " 
     + "from mc_treino "
     + "inner join mc_musculo "
     + "on mc_musculo.id = mc_treino.musculo "
     + "where mc_treino.aluno = ? "
-    + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.\"diaSemana\"";
+    + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.\"diaSemana\", mc_treino.objetivo";
 
     private static String SELECT_TREINO_POR_DIA = "select mc_musculo.descricao as musculoAlvo, " 
     + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
@@ -45,8 +46,8 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "where mc_musculo.id = ? and mc_aluno.id = ?";
 
     private static String INSERT = "insert into mc_treino (nome, exercicio, aluno, repeticoes, velocidade, "
-            + "descanso, musculo, \"diaSemana\", series) "
-            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+            + "descanso, musculo, \"diaSemana\", series, objetivo) "
+            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     private static String UPDATE = " update mc_treino set exercicio = ? where id = ?";  
 
     @Autowired
@@ -63,7 +64,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
 
         jbdcTemplate.update(INSERT, new Object[] {treino.getNome(), treino.getExercicio().getId(), 
         treino.getAluno().getId(), treino.getRepeticoes(), treino.getVelocidade(), treino.getDescanso(), 
-        treino.getMusculoAlvo().getId(), treino.getDiaSemana().getId(), treino.getSeries()});
+        treino.getMusculoAlvo().getId(), treino.getDiaSemana().getId(), treino.getSeries(), treino.getObjetivo().getId()});
 
         return treino;
     }
@@ -85,6 +86,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 Treino treino = new Treino();
                 Musculo musculo = new Musculo();
                 DiaSemana diaSemana = new DiaSemana();
+                Objetivo objetivo = new Objetivo();
                 
                 //treino.setId(rs.getInt("id"));
 
@@ -105,8 +107,8 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 //treino.setDescanso(rs.getString("descanso"));
                 treino.setNome(rs.getString("nome"));
 
-                //objetivo = objetivoRepo.obterObjetivoPorId(rs.getInt("objetivo"));
-                //treino.setObjetivo(objetivo);
+                objetivo.setId(rs.getInt("objetivo"));
+                treino.setObjetivo(objetivo);
                 
                 //treino.setRepeticoes(rs.getString("repeticoes"));
                 //treino.setSeries(rs.getString("series"));
