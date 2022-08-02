@@ -22,7 +22,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "inner join mc_musculo "
     + "on mc_musculo.id = mc_treino.musculo "
     + "where mc_treino.aluno = ? "
-    + "group by mc_musculo.descricao, mc_treino.nome";
+    + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id";
 
     private static String SELECT_TREINO_POR_DIA = "select mc_musculo.descricao as musculoAlvo, " 
     + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
