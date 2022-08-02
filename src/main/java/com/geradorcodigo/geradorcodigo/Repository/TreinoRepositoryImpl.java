@@ -60,7 +60,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
         this.jbdcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public Treino inserirTreinoAluno(Treino treino) {
+    public Treino salvarTreino(Treino treino) {
 
         jbdcTemplate.update(INSERT, new Object[] {treino.getNome(), treino.getExercicio().getId(), 
         treino.getAluno().getId(), treino.getRepeticoes(), treino.getVelocidade(), treino.getDescanso(), 

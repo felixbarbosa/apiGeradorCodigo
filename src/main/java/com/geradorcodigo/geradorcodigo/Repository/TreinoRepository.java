@@ -12,7 +12,7 @@ public interface TreinoRepository {
 
     List<Treino> obterTreinoAlunoPorMusculo(int alunoId, int musculoId);
 
-    Treino inserirTreinoAluno(Treino treino);
+    Treino salvarTreino(Treino treino);
 
     Treino atualizar(Treino treino);
 }
