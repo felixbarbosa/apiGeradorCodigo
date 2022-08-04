@@ -20,7 +20,7 @@ import com.geradorcodigo.geradorcodigo.Model.Treino;
 @Repository
 public class TreinoRepositoryImpl implements TreinoRepository{
 
-    private static String SELECT_TREINO_ALUNO = "mc_treino.objetivo, mc_treino.nome, mc_treino.\"diaSemana\" " 
+    private static String SELECT_TREINO_ALUNO = "select mc_treino.objetivo, mc_treino.nome, mc_treino.\"diaSemana\" " 
     + "from mc_treino "
     + "inner join mc_musculo "
     + "on mc_musculo.id = mc_treino.musculo "
