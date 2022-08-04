@@ -26,7 +26,7 @@ public class VariacoesExerciciosGraphQl implements GraphQLQueryResolver, GraphQL
         return lista;    
     }
 
-    public VariacoesExercicios salvarVariacoesExercicios(VariacoesExerciciosInput variacoesExerciciosInput, int exercicioId){
+    public VariacoesExercicios salvarVariacoesExercicios(VariacoesExerciciosInput variacoesExerciciosInput){
  
         VariacoesExercicios variacoesExercicios= new VariacoesExercicios();
         Exercicio exercicio = new Exercicio();
@@ -42,7 +42,7 @@ public class VariacoesExerciciosGraphQl implements GraphQLQueryResolver, GraphQL
         variacoesExercicios.setExercicio(exercicio);
 
         if(variacoesExercicios.getId() == 0){
-            variacoesExercicios = variacoesExerciciosRepo.cadastrarVariacao(variacoesExercicios, exercicioId);
+            variacoesExercicios = variacoesExerciciosRepo.cadastrarVariacao(variacoesExercicios);
         }
         return variacoesExercicios;
     }

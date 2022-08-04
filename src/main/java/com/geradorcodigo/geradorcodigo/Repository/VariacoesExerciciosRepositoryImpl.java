@@ -37,7 +37,7 @@ public class VariacoesExerciciosRepositoryImpl implements VariacoesExerciciosRep
         this.jbdcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public VariacoesExercicios cadastrarVariacao(VariacoesExercicios variacoes, int exercicioId) {
+    public VariacoesExercicios cadastrarVariacao(VariacoesExercicios variacoes) {
 
         jbdcTemplate.update(INSERT, new Object[] { variacoes.getDescricao(), variacoes.getMusculo().getId(), 
         variacoes.getExercicio().getId()});
