@@ -8,6 +8,8 @@ public interface TreinoRepository {
 
     List<Treino> obterTreinoAluno(int alunoId);
 
+    List<Treino> obterTreinoAlunoNome(int alunoId, String nome);
+
     List<Treino> obterTreinoAlunoPorDia(int alunoId, int diaSemanaId);
 
     List<Treino> obterTreinoAlunoPorMusculo(int alunoId, int musculoId);

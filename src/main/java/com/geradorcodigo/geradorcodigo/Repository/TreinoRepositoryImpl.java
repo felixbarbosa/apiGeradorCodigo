@@ -20,13 +20,21 @@ import com.geradorcodigo.geradorcodigo.Model.Treino;
 @Repository
 public class TreinoRepositoryImpl implements TreinoRepository{
 
-    private static String SELECT_TREINO_ALUNO = "select mc_treino.objetivo, mc_treino.nome, mc_treino.\"diaSemana\", mc_musculo.descricao, mc_musculo.id as musculoId " 
+    private static String SELECT_TREINO_ALUNO = "mc_treino.objetivo, mc_treino.nome, mc_treino.\"diaSemana\" " 
     + "from mc_treino "
     + "inner join mc_musculo "
     + "on mc_musculo.id = mc_treino.musculo "
     + "where mc_treino.aluno = ? "
-    + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.\"diaSemana\", mc_treino.objetivo";
+    + "group by mc_treino.nome, mc_treino.\"diaSemana\", mc_treino.objetivo";
 
+    private static String SELECT_TREINO_ALUNO_NOME = "select mc_treino.objetivo, mc_treino.nome, mc_treino.\"diaSemana\", mc_musculo.descricao, mc_musculo.id as musculoId " 
+    + "from mc_treino "
+    + "inner join mc_musculo "
+    + "on mc_musculo.id = mc_treino.musculo "
+    + "where mc_treino.aluno = ? "
+    + "and mc_treino.nome = ? "
+    + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.\"diaSemana\", mc_treino.objetivo";
+    
     private static String SELECT_TREINO_POR_DIA = "select mc_musculo.descricao as musculoAlvo, " 
     + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
     + "mc_treino.velocidade from mc_treino "
@@ -84,7 +92,6 @@ public class TreinoRepositoryImpl implements TreinoRepository{
             public Treino mapRow(ResultSet rs, int rownumber) throws SQLException{
 
                 Treino treino = new Treino();
-                Musculo musculo = new Musculo();
                 DiaSemana diaSemana = new DiaSemana();
                 Objetivo objetivo = new Objetivo();
                 
@@ -96,7 +103,45 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 diaSemana = diaSemanaRepo.obterDiaSemanaPorId(rs.getInt("diaSemana"));
                 treino.setDiaSemana(diaSemana);
 
-                //musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
+                //exercicio = exercicioRepo.obterExercicioPorId(rs.getInt("exercicio"));
+                //treino.setExercicio(exercicio);
+
+                //treino.setDescanso(rs.getString("descanso"));
+                treino.setNome(rs.getString("nome"));
+
+                objetivo.setId(rs.getInt("objetivo"));
+                treino.setObjetivo(objetivo);
+                
+                //treino.setRepeticoes(rs.getString("repeticoes"));
+                //treino.setSeries(rs.getString("series"));
+                //treino.setVelocidade(rs.getString("velocidade"));
+                
+                return treino;
+
+            }
+        }, alunoId);
+    }
+
+    public List<Treino> obterTreinoAlunoNome(int alunoId, String nome){
+
+        return jbdcTemplate.query(SELECT_TREINO_ALUNO_NOME, new RowMapper<Treino>(){
+
+            @Override
+            public Treino mapRow(ResultSet rs, int rownumber) throws SQLException{
+
+                Treino treino = new Treino();
+                DiaSemana diaSemana = new DiaSemana();
+                Musculo musculo = new Musculo();
+                Objetivo objetivo = new Objetivo();
+                
+                //treino.setId(rs.getInt("id"));
+
+                //aluno = alunoRepo.obterAlunoPorId(rs.getInt("aluno"));
+                //treino.setAluno(aluno);
+
+                diaSemana = diaSemanaRepo.obterDiaSemanaPorId(rs.getInt("diaSemana"));
+                treino.setDiaSemana(diaSemana);
+
                 musculo.setId(rs.getInt("musculoId"));
                 musculo.setDescricao(rs.getString("descricao"));
                 treino.setMusculoAlvo(musculo);
@@ -117,7 +162,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 return treino;
 
             }
-        }, alunoId);
+        }, alunoId, nome);
     }
 
     public List<Treino> obterTreinoAlunoPorDia(int alunoId, int diaSemanaId){

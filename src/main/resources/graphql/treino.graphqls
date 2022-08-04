@@ -28,6 +28,7 @@ extend type Query {
         obterTreinoAluno(alunoId: Int!):[Treino]!
         obterTreinoAlunoPorDia(alunoId: Int!, diaSemanaId: Int!):[Treino]!
         obterTreinoAlunoPorMusculo(alunoId: Int!, musculoId: Int!):[Treino]!
+        obterTreinoAlunoNome(alunoId: Int!, nome: String!):[Treino]!
 }
 
 extend type Mutation{
