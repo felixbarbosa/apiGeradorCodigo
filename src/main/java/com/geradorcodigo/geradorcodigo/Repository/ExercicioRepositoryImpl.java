@@ -34,7 +34,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
     public Exercicio salvarExercicio(Exercicio exercicio) {
 
-        jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {exercicio.getId(), exercicio.getDescricao(), 
+        jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {exercicio.getDescricao(), 
         exercicio.getMusculo().getId()});
 
         return exercicio;
