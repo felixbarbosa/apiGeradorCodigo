@@ -11,6 +11,8 @@ public class Aluno {
     private String email;
     private int idade;
     private Personal personal;
+    private Objetivo objetivo;
+    
 public int getId() {
         return id;
 }
@@ -64,6 +66,12 @@ public Personal getPersonal() {
 }
 public void setPersonal(Personal personal) {
         this.personal = personal;
+}
+public Objetivo getObjetivo() {
+        return objetivo;
+}
+public void setObjetivo(Objetivo objetivo) {
+        this.objetivo = objetivo;
 }
     
     

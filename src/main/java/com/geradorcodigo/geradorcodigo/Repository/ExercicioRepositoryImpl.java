@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
+import com.geradorcodigo.geradorcodigo.Model.Personal;
 
 @Repository
 public class ExercicioRepositoryImpl implements ExercicioRepository{
@@ -17,15 +18,19 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
     private static String SELECT_EXERCICIO_ID = "select * from mc_exercicio where id = ?";
     private static String SELECT_EXERCICIO_MUSCULO = "select * from mc_exercicio where musculo = ?";
     private static String SELECT_EXERCICIOS = "select * from mc_exercicio";
-    private static String INSERT_EXERCICIO = " insert into mc_exercicio (id, descricao, musculo) values " +
-        " (nextval('mc_exercicio_id_seq'), ?, ?) ";
-    //private static String UPDATE = " update exercicio set visto = ? where id = ?";  
+    private static String INSERT_EXERCICIO = " insert into mc_exercicio (id, descricao, musculo, professor) values " +
+        " (nextval('mc_exercicio_id_seq'), ?, ?, ?) ";
+    private static String UPDATE = " update mc_exercicio set descricao = ?, musculo = ? where id = ?";
+    private static String REMOVE = " delete from mc_exercicio where id = ?";  
 
     @Autowired
     private JdbcTemplate jbdcTemplate;
 
     @Autowired 
     private MusculoRepository musculoRepo;
+
+    @Autowired 
+    private PersonalRepository personalRepo;
 
     
     public void setDataSource(DataSource dataSource){
@@ -35,7 +40,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
     public Exercicio salvarExercicio(Exercicio exercicio) {
 
         jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {exercicio.getDescricao(), 
-        exercicio.getMusculo().getId()});
+        exercicio.getMusculo().getId(), exercicio.getProfessor().getId()});
 
         return exercicio;
     }
@@ -48,6 +53,10 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
                 
                 Exercicio exercicio = new Exercicio();
                 Musculo musculo = new Musculo();
+                Personal professor = new Personal();
+
+                professor = personalRepo.obterPersonalPorId(rs.getInt("professor"));
+                exercicio.setProfessor(professor);
 
                 exercicio.setId(rs.getInt("id"));
                 exercicio.setDescricao(rs.getString("descricao"));
@@ -61,12 +70,25 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
     }
 
-    /*public Exercicio atualizar(Exercicio exercicio) {
+    public Exercicio atualizar(Exercicio exercicio) {
     
-        jbdcTemplate.update(UPDATE, new Object[] { exercicio.getVisto(), exercicio.getId()});
+        jbdcTemplate.update(UPDATE, new Object[] { exercicio.getDescricao(), exercicio.getMusculo().getId(), exercicio.getId()});
 
         return exercicio; 
-    }*/
+    }
+
+    public Boolean deletar(int id) {
+
+        boolean removeu = true;
+
+        try {
+            jbdcTemplate.update(REMOVE, new Object[] {id});
+        } catch (Exception e) {
+            removeu = false;
+        }
+
+        return removeu; 
+    }
 
     /*public List<Exercicio> obterEntregasPendentes(){
 
@@ -103,6 +125,10 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
                 Exercicio exercicio = new Exercicio();
                 Musculo musculo = new Musculo();
+                Personal professor = new Personal();
+
+                professor = personalRepo.obterPersonalPorId(rs.getInt("professor"));
+                exercicio.setProfessor(professor);
 
                 exercicio.setId(rs.getInt("id"));
                 exercicio.setDescricao(rs.getString("descricao"));
@@ -125,6 +151,10 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
                 Exercicio exercicio = new Exercicio();
                 Musculo musculo = new Musculo();
+                Personal professor = new Personal();
+
+                professor = personalRepo.obterPersonalPorId(rs.getInt("professor"));
+                exercicio.setProfessor(professor);
 
                 exercicio.setId(rs.getInt("id"));
                 exercicio.setDescricao(rs.getString("descricao"));

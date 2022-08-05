@@ -5,6 +5,7 @@ public class Exercicio {
     private Integer id;
     private String descricao;
     private Musculo musculo;
+    private Personal professor;
     
     public Integer getId() {
             return id;
@@ -23,6 +24,12 @@ public Musculo getMusculo() {
 }
 public void setMusculo(Musculo musculo) {
         this.musculo = musculo;
+}
+public Personal getProfessor() {
+        return professor;
+}
+public void setProfessor(Personal professor) {
+        this.professor = professor;
 }
     
     

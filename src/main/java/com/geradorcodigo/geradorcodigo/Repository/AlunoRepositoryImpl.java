@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.geradorcodigo.geradorcodigo.Model.Aluno;
+import com.geradorcodigo.geradorcodigo.Model.Objetivo;
 import com.geradorcodigo.geradorcodigo.Model.Personal;
 
 @Repository
@@ -22,8 +23,8 @@ public class AlunoRepositoryImpl implements AlunoRepository{
     "?";
     private static String SELECT_ALUNO_ID = "select * from mc_aluno where id = " +
     "?";
-    private static String INSERT = " insert into mc_aluno (nome, cpf, login, senha, sexo, idade, email, personal) "
-            + " values (?, ?, ?, ?, ?, ?, ?, ?) ";
+    private static String INSERT = " insert into mc_aluno (nome, cpf, login, senha, sexo, idade, email, personal, objetivo) "
+            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
 
     @Autowired
@@ -31,6 +32,9 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
     @Autowired
     private PersonalRepository personalRepo;
+
+    @Autowired
+    private ObjetivoRepository objetivoRepo;
 
     
     public void setDataSource(DataSource dataSource){
@@ -40,7 +44,7 @@ public class AlunoRepositoryImpl implements AlunoRepository{
     public Aluno salvarAluno(Aluno aluno) {
 
         jbdcTemplate.update(INSERT, new Object[] {aluno.getNome(), aluno.getCpf(), aluno.getLogin(), aluno.getSenha(), 
-        aluno.getSexo(), aluno.getIdade(), aluno.getEmail(), aluno.getPersonal().getId()});
+        aluno.getSexo(), aluno.getIdade(), aluno.getEmail(), aluno.getPersonal().getId(), aluno.getObjetivo().getId()});
 
         return aluno;
     }
@@ -60,6 +64,7 @@ public class AlunoRepositoryImpl implements AlunoRepository{
                 
                 Aluno aluno = new Aluno();
                 Personal personal = new Personal();
+                Objetivo objetivo = new Objetivo();
 
                 aluno.setId(rs.getInt("id"));
                 aluno.setCpf(rs.getString("cpf"));
@@ -70,6 +75,9 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
                 personal = personalRepo.obterPersonalPorId(rs.getInt("personal"));
                 aluno.setPersonal(personal);
+
+                objetivo = objetivoRepo.obterObjetivoPorId(rs.getInt("objetivo"));
+                aluno.setObjetivo(objetivo);
 
                 aluno.setSenha(rs.getString("senha"));
                 aluno.setSexo(rs.getString("sexo"));
@@ -93,6 +101,7 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
                 Aluno aluno = new Aluno();
                 Personal personal = new Personal();
+                Objetivo objetivo = new Objetivo();
 
                 aluno.setId(rs.getInt("id"));
                 aluno.setCpf(rs.getString("cpf"));
@@ -100,8 +109,13 @@ public class AlunoRepositoryImpl implements AlunoRepository{
                 aluno.setIdade(rs.getInt("idade"));
                 aluno.setLogin(rs.getString("login"));
                 aluno.setNome(rs.getString("nome"));
+
                 personal.setId(rs.getInt("personal"));
                 aluno.setPersonal(personal);
+
+                objetivo = objetivoRepo.obterObjetivoPorId(rs.getInt("objetivo"));
+                aluno.setObjetivo(objetivo);
+
                 aluno.setSenha(rs.getString("senha"));
                 aluno.setSexo(rs.getString("sexo"));
                 

@@ -8,7 +8,6 @@ import com.geradorcodigo.geradorcodigo.Model.Aluno;
 import com.geradorcodigo.geradorcodigo.Model.DiaSemana;
 import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
-import com.geradorcodigo.geradorcodigo.Model.Objetivo;
 import com.geradorcodigo.geradorcodigo.Model.Treino;
 import com.geradorcodigo.geradorcodigo.Model.TreinoInput;
 import com.geradorcodigo.geradorcodigo.Repository.TreinoRepository;
@@ -54,7 +53,6 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         DiaSemana diaSemana = new DiaSemana();
         Exercicio exercicio = new Exercicio();
         Musculo musculo = new Musculo();
-        Objetivo objetivo = new Objetivo();
 
         treino.setId(treinoInput.getId());
 
@@ -73,9 +71,7 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         treino.setMusculoAlvo(musculo);
 
         treino.setNome(treinoInput.getNome());
-
-        objetivo.setId(treinoInput.getObjetivo());
-        treino.setObjetivo(objetivo);
+        treino.setInstrucao(treinoInput.getInstrucao());
 
         treino.setRepeticoes(treinoInput.getRepeticoes());
         treino.setSeries(treinoInput.getSeries());

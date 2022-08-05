@@ -7,6 +7,7 @@ import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.ExercicioInput;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
+import com.geradorcodigo.geradorcodigo.Model.Personal;
 import com.geradorcodigo.geradorcodigo.Repository.ExercicioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,10 @@ public class ExercicioGraphQl implements GraphQLQueryResolver, GraphQLMutationRe
  
         Exercicio exercicio = new Exercicio();
         Musculo musculo = new Musculo();
+        Personal professor = new Personal();
+
+        professor.setId(exercicioInput.getProfessor());
+        exercicio.setProfessor(professor);
 
         exercicio.setId(exercicioInput.getId());
         exercicio.setDescricao(exercicioInput.getDescricao());
@@ -50,8 +55,24 @@ public class ExercicioGraphQl implements GraphQLQueryResolver, GraphQLMutationRe
 
         if(exercicio.getId() == 0){
             exercicio = exercicioRepo.salvarExercicio(exercicio);
+        }else{
+            exercicio = exercicioRepo.atualizar(exercicio);
         }
         return exercicio;
+    }
+
+    public Boolean deletarExercicio(Integer id){
+
+        Boolean removeu = false;
+
+        try{
+            removeu = exercicioRepo.deletar(id);
+        }catch(Exception e){
+
+        }
+
+        return removeu;
+        
     }
       
 }

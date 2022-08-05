@@ -7,7 +7,8 @@ type Aluno {
         sexo: String!,
         email: String!,
         idade: Int!,
-        personal: Personal!
+        personal: Personal!,
+        objetivo: Objetivo!
 }
 input AlunoInput {
         id: Int!,
@@ -18,7 +19,8 @@ input AlunoInput {
         sexo: String!,
         email: String!,
         idade: Int!,
-        personal: Int!
+        personal: Int!,
+        objetivo: Int!
 }
 extend type Query {
         obterAlunosProfessor(professorId: Int!):[Aluno]!

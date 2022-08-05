@@ -6,6 +6,7 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.geradorcodigo.geradorcodigo.Model.Aluno;
 import com.geradorcodigo.geradorcodigo.Model.AlunoInput;
+import com.geradorcodigo.geradorcodigo.Model.Objetivo;
 import com.geradorcodigo.geradorcodigo.Model.Personal;
 import com.geradorcodigo.geradorcodigo.Repository.AlunoRepository;
 
@@ -35,6 +36,7 @@ public class AlunoGraphQl implements GraphQLQueryResolver, GraphQLMutationResolv
  
         Aluno aluno= new Aluno();
         Personal personal = new Personal();
+        Objetivo objetivo = new Objetivo();
 
         aluno.setId(alunoInput.getId());
         aluno.setCpf(alunoInput.getCpf());
@@ -45,6 +47,9 @@ public class AlunoGraphQl implements GraphQLQueryResolver, GraphQLMutationResolv
 
         personal.setId(alunoInput.getPersonal());
         aluno.setPersonal(personal);
+
+        objetivo.setId(alunoInput.getObjetivo());
+        aluno.setObjetivo(objetivo);
 
         aluno.setSenha(alunoInput.getSenha());
         aluno.setSexo(alunoInput.getSexo());

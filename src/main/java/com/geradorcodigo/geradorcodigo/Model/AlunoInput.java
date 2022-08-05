@@ -11,6 +11,7 @@ public class AlunoInput {
         private String email;
         private Integer idade;
         private Integer personal;
+        private Integer objetivo;
         
         public Integer getId() {
                 return id;
@@ -66,6 +67,12 @@ public class AlunoInput {
             public void setPersonal(Integer personal) {
                     this.personal = personal;
             }
+        public Integer getObjetivo() {
+                return objetivo;
+        }
+        public void setObjetivo(Integer objetivo) {
+                this.objetivo = objetivo;
+        }
     
    
 

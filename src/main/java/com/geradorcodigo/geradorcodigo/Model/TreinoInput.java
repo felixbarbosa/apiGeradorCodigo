@@ -12,7 +12,7 @@ public class TreinoInput {
         private Integer musculoAlvo;
         private Integer diaSemana;
         private String series;
-        private Integer objetivo;
+        private String instrucao;
         
         public Integer getId() {
                 return id;
@@ -74,12 +74,13 @@ public class TreinoInput {
         public void setSeries(String series) {
                 this.series = series;
         }
-        public Integer getObjetivo() {
-                return objetivo;
+        public String getInstrucao() {
+                return instrucao;
         }
-        public void setObjetivo(Integer objetivo) {
-                this.objetivo = objetivo;
+        public void setInstrucao(String instrucao) {
+                this.instrucao = instrucao;
         }
+        
         
         
 }

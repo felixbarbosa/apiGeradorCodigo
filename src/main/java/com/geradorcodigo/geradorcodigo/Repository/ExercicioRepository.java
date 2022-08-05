@@ -16,5 +16,7 @@ public interface ExercicioRepository {
 
     Exercicio salvarExercicio(Exercicio exercicio);
 
-    //Exercicio atualizar(Exercicio entregador);
+    Exercicio atualizar(Exercicio exercicio);
+
+    Boolean deletar(int id);
 }
