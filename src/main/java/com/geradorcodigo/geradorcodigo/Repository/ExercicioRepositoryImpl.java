@@ -18,9 +18,9 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
     private static String SELECT_EXERCICIO_ID = "select * from mc_exercicio where id = ?";
     private static String SELECT_EXERCICIO_MUSCULO = "select * from mc_exercicio where musculo = ?";
     private static String SELECT_EXERCICIOS = "select * from mc_exercicio";
-    private static String INSERT_EXERCICIO = " insert into mc_exercicio (id, descricao, musculo, professor) values " +
-        " (nextval('mc_exercicio_id_seq'), ?, ?, ?) ";
-    private static String UPDATE = " update mc_exercicio set descricao = ?, musculo = ? where id = ?";
+    private static String INSERT_EXERCICIO = " insert into mc_exercicio (id, descricao, musculo, professor, url) values " +
+        " (nextval('mc_exercicio_id_seq'), ?, ?, ?, ?) ";
+    private static String UPDATE = " update mc_exercicio set descricao = ?, musculo = ?, url = ? where id = ?";
     private static String REMOVE = " delete from mc_exercicio where id = ?";  
 
     @Autowired
@@ -40,7 +40,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
     public Exercicio salvarExercicio(Exercicio exercicio) {
 
         jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {exercicio.getDescricao(), 
-        exercicio.getMusculo().getId(), exercicio.getProfessor().getId()});
+        exercicio.getMusculo().getId(), exercicio.getProfessor().getId(), exercicio.getUrlImagem()});
 
         return exercicio;
     }
@@ -64,6 +64,8 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
                 musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
                 exercicio.setMusculo(musculo);
 
+                exercicio.setUrlImagem(rs.getString("url"));
+
                 return exercicio;
             }
         });
@@ -72,7 +74,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
     public Exercicio atualizar(Exercicio exercicio) {
     
-        jbdcTemplate.update(UPDATE, new Object[] { exercicio.getDescricao(), exercicio.getMusculo().getId(), exercicio.getId()});
+        jbdcTemplate.update(UPDATE, new Object[] { exercicio.getDescricao(), exercicio.getMusculo().getId(), exercicio.getUrlImagem(), exercicio.getId()});
 
         return exercicio; 
     }
@@ -135,6 +137,8 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
                 musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
                 exercicio.setMusculo(musculo);
+
+                exercicio.setUrlImagem(rs.getString("url"));
                 
                 return exercicio;
 

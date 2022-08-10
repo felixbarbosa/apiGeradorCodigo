@@ -53,6 +53,8 @@ public class ExercicioGraphQl implements GraphQLQueryResolver, GraphQLMutationRe
         musculo.setId(exercicioInput.getMusculo());
         exercicio.setMusculo(musculo);
 
+        exercicio.setUrlImagem(exercicioInput.getUrlImagem());
+
         if(exercicio.getId() == 0){
             exercicio = exercicioRepo.salvarExercicio(exercicio);
         }else{

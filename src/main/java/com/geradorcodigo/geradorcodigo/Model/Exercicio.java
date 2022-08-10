@@ -6,6 +6,7 @@ public class Exercicio {
     private String descricao;
     private Musculo musculo;
     private Personal professor;
+    private String urlImagem;
     
     public Integer getId() {
             return id;
@@ -30,6 +31,12 @@ public Personal getProfessor() {
 }
 public void setProfessor(Personal professor) {
         this.professor = professor;
+}
+public String getUrlImagem() {
+        return urlImagem;
+}
+public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
 }
     
     
