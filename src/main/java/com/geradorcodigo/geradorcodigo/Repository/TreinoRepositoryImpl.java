@@ -44,7 +44,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "where mc_dia_semana.id = ? and mc_aluno.id = ?";
 
     private static String SELECT_TREINO_POR_MUSCULO = "select mc_musculo.descricao as musculoAlvo, " 
-    + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
+    + "mc_exercicio.descricao as exercicio, mc_exercicio.url as imagemexercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
     + "mc_treino.velocidade, mc_treino.instrucao from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
     + "inner join mc_aluno on mc_treino.aluno = mc_aluno.id "
@@ -145,6 +145,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 treino.setMusculoAlvo(musculo);
 
                 exercicio.setDescricao(rs.getString("exercicio"));
+                exercicio.setUrlImagem(rs.getString("imagemexercicio"));
                 treino.setExercicio(exercicio);
 
                 treino.setDescanso(rs.getString("descanso"));
