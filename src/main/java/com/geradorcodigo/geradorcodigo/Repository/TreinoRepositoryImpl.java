@@ -145,7 +145,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 treino.setMusculoAlvo(musculo);
 
                 exercicio.setDescricao(rs.getString("exercicio"));
-                exercicio.setUrlImagem(rs.getString("imagemexercicio"));
+                //exercicio.setUrlImagem(rs.getString("imagemexercicio"));
                 treino.setExercicio(exercicio);
 
                 treino.setDescanso(rs.getString("descanso"));
@@ -174,6 +174,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 treino.setMusculoAlvo(musculo);
 
                 exercicio.setDescricao(rs.getString("exercicio"));
+                exercicio.setUrlImagem(rs.getString("imagemexercicio"));
                 treino.setExercicio(exercicio);
 
                 treino.setDescanso(rs.getString("descanso"));
