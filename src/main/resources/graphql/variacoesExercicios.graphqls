@@ -12,6 +12,7 @@ input VariacoesExerciciosInput {
 }
 extend type Query {
         obterVariacoes(exercicioId: Int!):[VariacoesExercicios]!
+        obterVariacoesPorMusculo(musculoId: Int!):[VariacoesExercicios]!
 }
 
 extend type Mutation{
