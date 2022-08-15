@@ -165,6 +165,8 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
                 musculo = musculoRepo.obterMusculoPorId(musculoId);
                 exercicio.setMusculo(musculo);
+
+                exercicio.setUrlImagem(rs.getString("url"));
                 
                 return exercicio;
 
