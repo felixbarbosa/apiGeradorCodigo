@@ -13,7 +13,14 @@ public class TreinoInput {
         private Integer diaSemana;
         private String series;
         private String instrucao;
+        private Integer variacaoExercicio;
         
+        public Integer getVariacaoExercicio() {
+                return variacaoExercicio;
+        }
+        public void setVariacaoExercicio(Integer variacaoExercicio) {
+                this.variacaoExercicio = variacaoExercicio;
+        }
         public Integer getId() {
                 return id;
         }

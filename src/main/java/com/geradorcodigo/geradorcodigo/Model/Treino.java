@@ -13,8 +13,9 @@ public class Treino {
     private DiaSemana diaSemana;
     private String series;
     private String instrucao;
+    private VariacoesExercicios variacaoExercicio;
     
-    public Integer getId() {
+public Integer getId() {
             return id;
     }
     public void setId(Integer id) {
@@ -79,6 +80,12 @@ public String getInstrucao() {
 }
 public void setInstrucao(String instrucao) {
         this.instrucao = instrucao;
+}
+public VariacoesExercicios getVariacaoExercicio() {
+        return variacaoExercicio;
+}
+public void setVariacaoExercicio(VariacoesExercicios variacaoExercicio) {
+        this.variacaoExercicio = variacaoExercicio;
 }
 
     

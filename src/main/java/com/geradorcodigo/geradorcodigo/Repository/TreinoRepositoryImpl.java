@@ -53,7 +53,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "where mc_musculo.id = ? and mc_aluno.id = ?";
 
     private static String INSERT = "insert into mc_treino (nome, exercicio, aluno, repeticoes, velocidade, "
-            + "descanso, musculo, \"diaSemana\", series, instrucao) "
+            + "descanso, musculo, \"diaSemana\", series, instrucao, variacaoexercicio) "
             + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     private static String UPDATE = " update mc_treino set exercicio = ? where id = ?";  
 
@@ -71,7 +71,8 @@ public class TreinoRepositoryImpl implements TreinoRepository{
 
         jbdcTemplate.update(INSERT, new Object[] {treino.getNome(), treino.getExercicio().getId(), 
         treino.getAluno().getId(), treino.getRepeticoes(), treino.getVelocidade(), treino.getDescanso(), 
-        treino.getMusculoAlvo().getId(), treino.getDiaSemana().getId(), treino.getSeries(), treino.getInstrucao()});
+        treino.getMusculoAlvo().getId(), treino.getDiaSemana().getId(), treino.getSeries(), treino.getInstrucao(),
+        treino.getVariacaoExercicio().getId()});
 
         return treino;
     }
