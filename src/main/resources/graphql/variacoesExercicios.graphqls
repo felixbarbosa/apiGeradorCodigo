@@ -11,6 +11,7 @@ input VariacoesExerciciosInput {
         exercicio: Int!,
 }
 extend type Query {
+        obterVariacaoPorId(variacaoId: Int!):VariacoesExercicios!
         obterVariacoes(exercicioId: Int!):[VariacoesExercicios]!
         obterVariacoesPorMusculo(musculoId: Int!):[VariacoesExercicios]!
 }

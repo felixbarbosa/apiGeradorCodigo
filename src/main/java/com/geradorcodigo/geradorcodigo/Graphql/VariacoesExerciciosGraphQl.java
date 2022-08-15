@@ -26,6 +26,12 @@ public class VariacoesExerciciosGraphQl implements GraphQLQueryResolver, GraphQL
         return lista;    
     }
 
+    public VariacoesExercicios obterVariacaoPorId(int variacaoId){
+
+        VariacoesExercicios variacao = variacoesExerciciosRepo.obterVariacoesPorId(variacaoId);
+        return variacao;    
+    }
+
     public List<VariacoesExercicios> obterVariacoesPorMusculo(int musculoId){
 
         List<VariacoesExercicios> lista = variacoesExerciciosRepo.obterVariacoesPorMusculo(musculoId);
