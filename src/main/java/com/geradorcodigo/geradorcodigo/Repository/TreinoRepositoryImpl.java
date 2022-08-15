@@ -15,6 +15,7 @@ import com.geradorcodigo.geradorcodigo.Model.DiaSemana;
 import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
 import com.geradorcodigo.geradorcodigo.Model.Treino;
+import com.geradorcodigo.geradorcodigo.Model.VariacoesExercicios;
 
 @Repository
 public class TreinoRepositoryImpl implements TreinoRepository{
@@ -45,7 +46,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
 
     private static String SELECT_TREINO_POR_MUSCULO = "select mc_musculo.descricao as musculoAlvo, " 
     + "mc_exercicio.descricao as exercicio, mc_exercicio.url as imagemexercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
-    + "mc_treino.velocidade, mc_treino.instrucao from mc_treino "
+    + "mc_treino.velocidade, mc_treino.instrucao, mc_treino.variacaoexercicio from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
     + "inner join mc_aluno on mc_treino.aluno = mc_aluno.id "
     + "inner join mc_exercicio on mc_treino.exercicio = mc_exercicio.id "
@@ -62,6 +63,9 @@ public class TreinoRepositoryImpl implements TreinoRepository{
 
     @Autowired
     private DiaSemanaRepository diaSemanaRepo;
+
+    @Autowired
+    private VariacoesExerciciosRepository variacaoRepo;
     
     public void setDataSource(DataSource dataSource){
         this.jbdcTemplate = new JdbcTemplate(dataSource);
@@ -170,9 +174,12 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 Treino treino = new Treino();
                 Musculo musculo = new Musculo();
                 Exercicio exercicio = new Exercicio();
+                VariacoesExercicios variacao = new VariacoesExercicios();
 
                 musculo.setDescricao(rs.getString("musculoAlvo"));
                 treino.setMusculoAlvo(musculo);
+
+                variacao = variacaoRepo.obterVariacoesPorId(rs.getInt("variacaoexercicio"));
 
                 exercicio.setDescricao(rs.getString("exercicio"));
                 exercicio.setUrlImagem(rs.getString("imagemexercicio"));

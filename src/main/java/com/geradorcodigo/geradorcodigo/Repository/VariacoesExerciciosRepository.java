@@ -8,6 +8,8 @@ public interface VariacoesExerciciosRepository {
     
     List<VariacoesExercicios> obterVariacoes(int exercicioId);
 
+    VariacoesExercicios obterVariacoesPorId(int variacaoId);
+
     List<VariacoesExercicios> obterVariacoesPorMusculo(int musculoId);
 
     VariacoesExercicios cadastrarVariacao(VariacoesExercicios variacoes);

@@ -20,6 +20,9 @@ public class VariacoesExerciciosRepositoryImpl implements VariacoesExerciciosRep
 
     private static String SELECT_VARIACOES_EXERCICIOS = "select * from mc_variacoes_exercicios where exercicio = " +
     "?";
+
+    private static String SELECT_VARIACAO_EXERCICIO = "select * from mc_variacoes_exercicios where id = " +
+    "?";
     private static String SELECT_VARIACOES_EXERCICIOS_MUSCULO = "select * from mc_variacoes_exercicios where musculo = " +
     "?";
     private static String INSERT = " insert into mc_variacoes_exercicios (descricao, musculo, exercicio) "
@@ -45,6 +48,32 @@ public class VariacoesExerciciosRepositoryImpl implements VariacoesExerciciosRep
         variacoes.getExercicio().getId()});
 
         return variacoes;
+    }
+
+    public VariacoesExercicios obterVariacoesPorId(int variacaoId){
+
+        return jbdcTemplate.queryForObject(SELECT_VARIACAO_EXERCICIO, new Object[] {variacaoId}, new RowMapper<VariacoesExercicios>(){
+
+            @Override
+            public VariacoesExercicios mapRow(ResultSet rs, int rownumber) throws SQLException{
+
+                VariacoesExercicios variacoes = new VariacoesExercicios();
+                Musculo musculo = new Musculo();
+                Exercicio exercicio = new Exercicio();
+
+                variacoes.setId(rs.getInt("id"));
+                variacoes.setDescricao(rs.getString("descricao"));
+
+                musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
+                variacoes.setMusculo(musculo);
+
+                exercicio = exercicioRepo.obterExercicioPorId(rs.getInt("exercicio"));
+                variacoes.setExercicio(exercicio);
+                
+                return variacoes;
+
+            }
+        });
     }
 
     public List<VariacoesExercicios> obterVariacoes(int exercicioId){
