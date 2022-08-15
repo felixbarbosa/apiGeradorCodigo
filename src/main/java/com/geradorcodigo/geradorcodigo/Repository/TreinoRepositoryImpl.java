@@ -179,9 +179,13 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 musculo.setDescricao(rs.getString("musculoAlvo"));
                 treino.setMusculoAlvo(musculo);
 
-                variacao = variacaoRepo.obterVariacoesPorId(rs.getInt("variacaoexercicio"));
-                treino.setVariacaoExercicio(variacao);
-
+                if(rs.getInt("variacaoexercicio") == 0){
+                    treino.setVariacaoExercicio(null);
+                }else{
+                    variacao = variacaoRepo.obterVariacoesPorId(rs.getInt("variacaoexercicio"));
+                    treino.setVariacaoExercicio(variacao);
+                }
+                
                 exercicio.setDescricao(rs.getString("exercicio"));
                 exercicio.setUrlImagem(rs.getString("imagemexercicio"));
                 treino.setExercicio(exercicio);
