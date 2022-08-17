@@ -12,6 +12,8 @@ public interface TreinoRepository {
 
     List<Treino> obterTreinoAlunoPorDia(int alunoId, int diaSemanaId);
 
+    List<Treino> obterTreinoNomeAluno(int alunoId, int diaSemanaId);
+
     List<Treino> obterTreinoAlunoPorMusculo(int alunoId, int musculoId);
 
     Treino salvarTreino(Treino treino);

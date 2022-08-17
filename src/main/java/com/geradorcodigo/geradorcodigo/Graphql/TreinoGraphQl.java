@@ -41,6 +41,12 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         return lista;    
     }
 
+    public List<Treino> obterTreinoNomeAluno(int alunoId, int diaSemanaId){
+
+        List<Treino> lista = treinoRepo.obterTreinoNomeAluno(alunoId, diaSemanaId);
+        return lista;    
+    }
+
     public List<Treino> obterTreinoAlunoPorMusculo(int alunoId, int musculoId){
 
         List<Treino> lista = treinoRepo.obterTreinoAlunoPorMusculo(alunoId, musculoId);

@@ -35,7 +35,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "and mc_treino.nome = ? "
     + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.\"diaSemana\"";
     
-    private static String SELECT_TREINO_POR_DIA = "select mc_musculo.descricao as musculoAlvo, " 
+    private static String SELECT_TREINO_POR_DIA_ALUNO = "select mc_musculo.descricao as musculoAlvo, " 
     + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
     + "mc_treino.velocidade from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
@@ -43,6 +43,13 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "inner join mc_exercicio on mc_treino.exercicio = mc_exercicio.id "
     + "inner join mc_dia_semana on mc_treino.\"diaSemana\" = mc_dia_semana.id "
     + "where mc_dia_semana.id = ? and mc_aluno.id = ?";
+
+    private static String SELECT_TREINO_NOME_ALUNO = "select mc_treino.nome from mc_treino "
+    + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
+    + "inner join mc_aluno on mc_treino.aluno = mc_aluno.id "
+    + "inner join mc_exercicio on mc_treino.exercicio = mc_exercicio.id "
+    + "inner join mc_dia_semana on mc_treino.\"diaSemana\" = mc_dia_semana.id "
+    + "where mc_dia_semana.id = ? and mc_aluno.id = ? group by mc_treino.nome";
 
     private static String SELECT_TREINO_POR_MUSCULO = "select mc_musculo.descricao as musculoAlvo, " 
     + "mc_exercicio.descricao as exercicio, mc_exercicio.url as imagemexercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
@@ -137,7 +144,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
 
     public List<Treino> obterTreinoAlunoPorDia(int alunoId, int diaSemanaId){
         
-        return jbdcTemplate.query(SELECT_TREINO_POR_DIA, new RowMapper<Treino>(){
+        return jbdcTemplate.query(SELECT_TREINO_POR_DIA_ALUNO, new RowMapper<Treino>(){
 
             @Override
             public Treino mapRow(ResultSet rs, int rownumber) throws SQLException{
@@ -157,6 +164,23 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 treino.setRepeticoes(rs.getString("repeticoes"));
                 treino.setSeries(rs.getString("series"));
                 treino.setVelocidade(rs.getString("velocidade"));
+                
+                return treino;
+
+            }
+        }, diaSemanaId, alunoId);
+    }
+
+    public List<Treino> obterTreinoNomeAluno(int alunoId, int diaSemanaId){
+        
+        return jbdcTemplate.query(SELECT_TREINO_NOME_ALUNO, new RowMapper<Treino>(){
+
+            @Override
+            public Treino mapRow(ResultSet rs, int rownumber) throws SQLException{
+
+                Treino treino = new Treino();
+
+                treino.setNome(rs.getString("nome"));
                 
                 return treino;
 
