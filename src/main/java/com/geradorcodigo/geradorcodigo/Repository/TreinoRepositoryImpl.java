@@ -166,6 +166,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 
                 exercicio.setDescricao(rs.getString("exercicio"));
                 exercicio.setUrlImagem(rs.getString("imagemexercicio"));
+                exercicio.setId(rs.getInt("id"));
                 treino.setExercicio(exercicio);
 
                 treino.setDescanso(rs.getString("descanso"));
