@@ -36,13 +36,13 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.\"diaSemana\"";
     
     private static String SELECT_TREINO_POR_DIA_ALUNO = "select mc_musculo.descricao as musculoAlvo, " 
-    + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
-    + "mc_treino.velocidade from mc_treino "
+    + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_exercicio.url as imagemexercicio, mc_treino.repeticoes, mc_treino.descanso, "
+    + "mc_treino.velocidade, mc_treino.instrucao, mc_treino.variacaoexercicio from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
     + "inner join mc_aluno on mc_treino.aluno = mc_aluno.id "
     + "inner join mc_exercicio on mc_treino.exercicio = mc_exercicio.id "
     + "inner join mc_dia_semana on mc_treino.\"diaSemana\" = mc_dia_semana.id "
-    + "where mc_dia_semana.id = ? and mc_aluno.id = ?";
+    + "where mc_dia_semana.id = ? and mc_aluno.id = ? order by musculoAlvo";
 
     private static String SELECT_TREINO_NOME_ALUNO = "select mc_treino.nome from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
@@ -152,18 +152,27 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 Treino treino = new Treino();
                 Musculo musculo = new Musculo();
                 Exercicio exercicio = new Exercicio();
+                VariacoesExercicios variacao = new VariacoesExercicios();
 
                 musculo.setDescricao(rs.getString("musculoAlvo"));
                 treino.setMusculoAlvo(musculo);
 
+                if(rs.getInt("variacaoexercicio") == 0){
+                    treino.setVariacaoExercicio(null);
+                }else{
+                    variacao = variacaoRepo.obterVariacoesPorId(rs.getInt("variacaoexercicio"));
+                    treino.setVariacaoExercicio(variacao);
+                }
+                
                 exercicio.setDescricao(rs.getString("exercicio"));
-                //exercicio.setUrlImagem(rs.getString("imagemexercicio"));
+                exercicio.setUrlImagem(rs.getString("imagemexercicio"));
                 treino.setExercicio(exercicio);
 
                 treino.setDescanso(rs.getString("descanso"));
                 treino.setRepeticoes(rs.getString("repeticoes"));
                 treino.setSeries(rs.getString("series"));
                 treino.setVelocidade(rs.getString("velocidade"));
+                treino.setInstrucao(rs.getString("instrucao"));
                 
                 return treino;
 
