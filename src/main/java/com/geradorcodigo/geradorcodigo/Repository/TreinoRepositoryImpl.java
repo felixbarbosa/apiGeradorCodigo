@@ -35,7 +35,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "and mc_treino.nome = ? "
     + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.\"diaSemana\"";
     
-    private static String SELECT_TREINO_POR_DIA_ALUNO = "select mc_musculo.descricao as musculoAlvo, " 
+    private static String SELECT_TREINO_POR_DIA_ALUNO = "select mc_musculo.descricao as musculoAlvo, mc_exercicio.id, " 
     + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_exercicio.url as imagemexercicio, mc_treino.repeticoes, mc_treino.descanso, "
     + "mc_treino.velocidade, mc_treino.instrucao, mc_treino.variacaoexercicio from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
