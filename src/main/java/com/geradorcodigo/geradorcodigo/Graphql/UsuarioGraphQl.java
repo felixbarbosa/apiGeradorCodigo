@@ -6,6 +6,9 @@ import com.geradorcodigo.geradorcodigo.Model.Pessoa;
 import com.geradorcodigo.geradorcodigo.Model.Usuario;
 import com.geradorcodigo.geradorcodigo.Model.UsuarioInput;
 import com.geradorcodigo.geradorcodigo.Repository.UsuarioRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +18,10 @@ public class UsuarioGraphQl implements GraphQLQueryResolver, GraphQLMutationReso
     @Autowired
     private UsuarioRepository usuarioRepo;
 
-    public Usuario obterUsuario(String login, String senha){
+    public List<Usuario> obterUsuario(String login, String senha){
 
-        Usuario usuario = usuarioRepo.obterUsuario(login, senha);
-        return usuario;    
+        List<Usuario> lista = usuarioRepo.obterUsuario(login, senha);
+        return lista;    
     }
 
     public Usuario salvarUsuario(UsuarioInput usuarioInput){

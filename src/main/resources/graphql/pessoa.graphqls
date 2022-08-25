@@ -2,10 +2,10 @@ type Pessoa {
         id: Int!,
         nome: String!,
         email: String!,
-        cref: String!,
-        cpf: String!,
-        aluno: Aluno!,
-        personal: Personal!
+        cref: String,
+        cpf: String,
+        aluno: Aluno,
+        personal: Personal
 }
 input PessoaInput {
         id: Int!,

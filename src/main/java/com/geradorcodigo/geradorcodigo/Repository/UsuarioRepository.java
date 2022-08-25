@@ -1,9 +1,11 @@
 package com.geradorcodigo.geradorcodigo.Repository;
+import java.util.List;
+
 import com.geradorcodigo.geradorcodigo.Model.Usuario;
 
 public interface UsuarioRepository {
 
-    Usuario obterUsuario(String login, String senha);
+    List<Usuario> obterUsuario(String login, String senha);
 
     Usuario salvarUsuario(Usuario usuario);
 

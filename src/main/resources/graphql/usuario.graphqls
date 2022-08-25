@@ -2,7 +2,7 @@ type Usuario {
         id: Int!,
         login: String!,
         senha: String!,
-        pessoa: Pessoa!
+        pessoa: Pessoa
 }
 input UsuarioInput {
         id: Int!,
@@ -11,7 +11,7 @@ input UsuarioInput {
         pessoa: Int!
 }
 extend type Query {
-        obterUsuario(login: String!, senha: String!):Usuario!
+        obterUsuario(login: String!, senha: String!):[Usuario]!
 }
 
 extend type Mutation{

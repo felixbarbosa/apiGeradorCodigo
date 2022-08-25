@@ -58,11 +58,21 @@ public class PessoaRepositoryImpl implements PessoaRepository{
                 pessoa.setCref(rs.getString("cref"));
                 pessoa.setCpf(rs.getString("cpf"));
 
-                personal = personalRepo.obterPersonalPorId(rs.getInt("personal"));
-                pessoa.setPersonal(personal);
+                if(rs.getInt("personal") == 0){
+                    pessoa.setPersonal(null);
+                }else{
+                    personal = personalRepo.obterPersonalPorId(rs.getInt("personal"));
+                    pessoa.setPersonal(personal);
+                }
+                
+                if(rs.getInt("aluno") == 0){
+                    pessoa.setAluno(null);
+                }else{
+                    aluno = alunoRepo.obterAlunoPorId(rs.getInt("aluno"));
+                    pessoa.setAluno(aluno);
+                }
 
-                aluno = alunoRepo.obterAlunoPorId(rs.getInt("aluno"));
-                pessoa.setAluno(aluno);
+                
 
                 return pessoa;
             }
