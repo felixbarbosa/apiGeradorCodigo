@@ -1,0 +1,19 @@
+type Usuario {
+        id: Int!,
+        login: String!,
+        senha: String!,
+        pessoa: Pessoa!
+}
+input UsuarioInput {
+        id: Int!,
+        login: String!,
+        senha: String!,
+        pessoa: Int!
+}
+extend type Query {
+        obterUsuario(login: String!, senha: String!):Usuario!
+}
+
+extend type Mutation{
+        salvarUsuario(usuario:UsuarioInput!): Usuario!    
+}
