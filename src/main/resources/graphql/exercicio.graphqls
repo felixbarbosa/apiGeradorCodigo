@@ -3,14 +3,18 @@ type Exercicio {
         descricao: String!,
         musculo: Musculo!,
         professor: Personal!,
-        urlImagem: String
+        urlImagem: String,
+        urlVideo: String,
+        instrucao: String
 }
 input ExercicioInput {
         id: Int!,
         descricao: String!,
         musculo: Int!,
         professor: Int!,
-        urlImagem: String
+        urlImagem: String,
+        urlVideo: String,
+        instrucao: String
 }
 extend type Query {
         obterExercicioPorId(id:Int!):Exercicio!

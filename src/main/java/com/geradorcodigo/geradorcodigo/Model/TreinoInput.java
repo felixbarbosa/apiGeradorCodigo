@@ -12,7 +12,6 @@ public class TreinoInput {
         private Integer musculoAlvo;
         private Integer diaSemana;
         private String series;
-        private String instrucao;
         private Integer variacaoExercicio;
         
         public Integer getVariacaoExercicio() {
@@ -80,12 +79,6 @@ public class TreinoInput {
         }
         public void setSeries(String series) {
                 this.series = series;
-        }
-        public String getInstrucao() {
-                return instrucao;
-        }
-        public void setInstrucao(String instrucao) {
-                this.instrucao = instrucao;
         }
         
         

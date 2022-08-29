@@ -36,8 +36,8 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "group by mc_musculo.descricao, mc_treino.nome, mc_musculo.id, mc_treino.\"diaSemana\"";
     
     private static String SELECT_TREINO_POR_DIA_ALUNO = "select mc_musculo.descricao as musculoAlvo, mc_exercicio.id, " 
-    + "mc_exercicio.descricao as exercicio, mc_treino.series, mc_exercicio.url as imagemexercicio, mc_treino.repeticoes, mc_treino.descanso, "
-    + "mc_treino.velocidade, mc_treino.instrucao, mc_treino.variacaoexercicio from mc_treino "
+    + "mc_exercicio.descricao as exercicio, mc_exercicio.urlvideo as videoexercicio, mc_treino.series, mc_exercicio.urlimage as imagemexercicio, mc_treino.repeticoes, mc_treino.descanso, "
+    + "mc_treino.velocidade, mc_treino.variacaoexercicio,  mc_exercicio.instrucao from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
     + "inner join mc_aluno on mc_treino.aluno = mc_aluno.id "
     + "inner join mc_exercicio on mc_treino.exercicio = mc_exercicio.id "
@@ -52,8 +52,9 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "where mc_dia_semana.id = ? and mc_aluno.id = ? group by mc_treino.nome";
 
     private static String SELECT_TREINO_POR_MUSCULO = "select mc_musculo.descricao as musculoAlvo, " 
-    + "mc_exercicio.descricao as exercicio, mc_exercicio.url as imagemexercicio, mc_treino.series, mc_treino.repeticoes, mc_treino.descanso, "
-    + "mc_treino.velocidade, mc_treino.instrucao, mc_treino.variacaoexercicio from mc_treino "
+    + "mc_exercicio.descricao as exercicio, mc_exercicio.urlimage as imagemexercicio, mc_treino.series, " 
+    + "mc_exercicio.urlvideo as videoexercicio, mc_exercicio.instrucao, mc_treino.repeticoes, mc_treino.descanso, "
+    + "mc_treino.velocidade, mc_treino.variacaoexercicio from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
     + "inner join mc_aluno on mc_treino.aluno = mc_aluno.id "
     + "inner join mc_exercicio on mc_treino.exercicio = mc_exercicio.id "
@@ -82,7 +83,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
 
         jbdcTemplate.update(INSERT, new Object[] {treino.getNome(), treino.getExercicio().getId(), 
         treino.getAluno().getId(), treino.getRepeticoes(), treino.getVelocidade(), treino.getDescanso(), 
-        treino.getMusculoAlvo().getId(), treino.getDiaSemana().getId(), treino.getSeries(), treino.getInstrucao(),
+        treino.getMusculoAlvo().getId(), treino.getDiaSemana().getId(), treino.getSeries(),
         treino.getVariacaoExercicio().getId()});
 
         return treino;
@@ -167,13 +168,15 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 exercicio.setDescricao(rs.getString("exercicio"));
                 exercicio.setUrlImagem(rs.getString("imagemexercicio"));
                 exercicio.setId(rs.getInt("id"));
+                exercicio.setUrlImagem(rs.getString("imagemexercicio"));
+                exercicio.setUrlVideo(rs.getString("videoexercicio"));
+                exercicio.setInstrucao(rs.getString("instrucao"));
                 treino.setExercicio(exercicio);
 
                 treino.setDescanso(rs.getString("descanso"));
                 treino.setRepeticoes(rs.getString("repeticoes"));
                 treino.setSeries(rs.getString("series"));
                 treino.setVelocidade(rs.getString("velocidade"));
-                treino.setInstrucao(rs.getString("instrucao"));
                 
                 return treino;
 
@@ -222,13 +225,14 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 
                 exercicio.setDescricao(rs.getString("exercicio"));
                 exercicio.setUrlImagem(rs.getString("imagemexercicio"));
+                exercicio.setUrlVideo(rs.getString("videoexercicio"));
+                exercicio.setInstrucao(rs.getString("instrucao"));
                 treino.setExercicio(exercicio);
 
                 treino.setDescanso(rs.getString("descanso"));
                 treino.setRepeticoes(rs.getString("repeticoes"));
                 treino.setSeries(rs.getString("series"));
                 treino.setVelocidade(rs.getString("velocidade"));
-                treino.setInstrucao(rs.getString("instrucao"));
                 
                 return treino;
 

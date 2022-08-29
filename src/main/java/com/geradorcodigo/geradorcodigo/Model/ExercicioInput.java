@@ -7,9 +7,23 @@ public class ExercicioInput {
         private Integer musculo;
         private Integer professor;
         private String urlImagem;
+        private String urlVideo;
+        private String instrucao;
         
         public String getUrlImagem() {
                 return urlImagem;
+        }
+        public String getUrlVideo() {
+                return urlVideo;
+        }
+        public void setUrlVideo(String urlVideo) {
+                this.urlVideo = urlVideo;
+        }
+        public String getInstrucao() {
+                return instrucao;
+        }
+        public void setInstrucao(String instrucao) {
+                this.instrucao = instrucao;
         }
         public void setUrlImagem(String urlImagem) {
                 this.urlImagem = urlImagem;

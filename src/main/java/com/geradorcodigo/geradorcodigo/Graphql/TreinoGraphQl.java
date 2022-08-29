@@ -82,7 +82,6 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         treino.setVariacaoExercicio(variacao);
 
         treino.setNome(treinoInput.getNome());
-        treino.setInstrucao(treinoInput.getInstrucao());
 
         treino.setRepeticoes(treinoInput.getRepeticoes());
         treino.setSeries(treinoInput.getSeries());
