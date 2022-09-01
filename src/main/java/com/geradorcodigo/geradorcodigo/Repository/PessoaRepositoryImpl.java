@@ -6,6 +6,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import com.geradorcodigo.geradorcodigo.Model.Aluno;
 import com.geradorcodigo.geradorcodigo.Model.Personal;
@@ -29,6 +31,9 @@ public class PessoaRepositoryImpl implements PessoaRepository{
     @Autowired
     private AlunoRepository alunoRepo;
 
+    Integer alunoId = 0;
+    Integer professorId = 0;
+
     
     public void setDataSource(DataSource dataSource){
         this.jbdcTemplate = new JdbcTemplate(dataSource);
@@ -36,8 +41,25 @@ public class PessoaRepositoryImpl implements PessoaRepository{
 
     public Pessoa salvarPessoa(Pessoa pessoa) {
 
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        if(pessoa.getAluno().getId() == 0){
+            System.out.println("Aluno é nulo");
+            alunoId = null;
+            professorId = pessoa.getPersonal().getId();
+        }else if(pessoa.getPersonal().getId() == 0){
+            System.out.println("Professor é nulo");
+            professorId = null;
+            alunoId = pessoa.getAluno().getId();
+        }else{
+            alunoId = pessoa.getAluno().getId();
+            professorId = pessoa.getPersonal().getId();
+        }
+
         jbdcTemplate.update(INSERT, new Object[] {pessoa.getNome(), pessoa.getEmail(), pessoa.getCref(), 
-            pessoa.getCpf(), pessoa.getAluno().getId(), pessoa.getPersonal().getId()});
+            pessoa.getCpf(), alunoId, professorId}, keyHolder);
+
+        System.out.println("Id gerado = " + keyHolder.getKey());
 
         return pessoa;
     }

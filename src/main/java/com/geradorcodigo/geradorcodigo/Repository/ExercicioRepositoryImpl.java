@@ -1,12 +1,16 @@
 package com.geradorcodigo.geradorcodigo.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
@@ -39,9 +43,13 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
     public Exercicio salvarExercicio(Exercicio exercicio) {
 
-        jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {exercicio.getDescricao(), 
-        exercicio.getMusculo().getId(), exercicio.getProfessor().getId(), exercicio.getUrlImagem(), exercicio.getUrlVideo(), exercicio.getInstrucao()});
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
+        jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {exercicio.getDescricao(), 
+        exercicio.getMusculo().getId(), exercicio.getProfessor().getId(), exercicio.getUrlImagem(), exercicio.getUrlVideo(), exercicio.getInstrucao()}, keyHolder);
+
+        System.out.println("Id gerado = " + keyHolder.getKey());
+        
         return exercicio;
     }
 

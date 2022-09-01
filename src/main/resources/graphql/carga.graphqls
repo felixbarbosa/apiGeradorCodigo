@@ -1,0 +1,22 @@
+type Carga {
+        id: Int,
+        carga: String,
+        aluno: Aluno,
+        exercicio: Exercicio,
+        data: String
+}
+input CargaInput {
+        id: Int!,
+        carga: String!,
+        aluno: Int!,
+        exercicio: Int!,
+        data: String!
+}
+extend type Query {
+        obterCargasPorAluno(aluno: Int!):[Carga]!
+        obterCargasPorAlunoPorExercicio(aluno: Int!, exercicio: Int!):Carga
+}
+
+extend type Mutation{
+        salvarCarga(carga:CargaInput!): Carga!    
+}

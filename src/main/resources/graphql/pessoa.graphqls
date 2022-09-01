@@ -11,10 +11,10 @@ input PessoaInput {
         id: Int!,
         nome: String!,
         email: String!,
-        cref: String!,
-        cpf: String!,
-        aluno: Int!,
-        personal: Int!
+        cref: String,
+        cpf: String,
+        aluno: Int,
+        personal: Int
 }
 extend type Query {
         obterPessoa(id: Int!):Pessoa!
