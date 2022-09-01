@@ -19,7 +19,7 @@ public class CargaRepositoryImpl implements CargaRepository{
     private static String SELECT_CARGA_ALUNO_EXERCICIO = "select * from mc_carga where aluno = ? and exercicio = ?";
     private static String SELECT_CARGA_ALUNO = "select * from mc_carga where aluno = ?";
     private static String INSERT = " insert into mc_carga (carga, aluno, exercicio, data) "
-            + " values (?, ?, ?) ";
+            + " values (?, ?, ?, ?) ";
     //private static String UPDATE = " update mc_carga set nome = ? where id = ?";  
 
     @Autowired
