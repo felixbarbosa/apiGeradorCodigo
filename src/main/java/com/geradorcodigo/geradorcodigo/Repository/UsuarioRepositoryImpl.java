@@ -16,8 +16,8 @@ import com.geradorcodigo.geradorcodigo.Model.Usuario;
 public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     private static String SELECT_USUARIO = "select * from mc_usuario where login = ? and senha = ?";
-    private static String INSERT = " insert into mc_usuario (login, senha, pessoa) "
-            + " values (?, ?, ?) ";
+    private static String INSERT = " insert into mc_usuario (id, login, senha, pessoa) "
+            + " values (nextval('mc_usuario_id_seq'), ?, ?, ?) ";
     //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
 
     @Autowired

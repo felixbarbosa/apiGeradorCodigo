@@ -6,7 +6,10 @@ import com.geradorcodigo.geradorcodigo.Model.Aluno;
 import com.geradorcodigo.geradorcodigo.Model.Personal;
 import com.geradorcodigo.geradorcodigo.Model.Pessoa;
 import com.geradorcodigo.geradorcodigo.Model.PessoaInput;
+import com.geradorcodigo.geradorcodigo.Model.Usuario;
 import com.geradorcodigo.geradorcodigo.Repository.PessoaRepository;
+import com.geradorcodigo.geradorcodigo.Repository.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +48,6 @@ public class PessoaGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
             pessoa = pessoaRepo.salvarPessoa(pessoa);
         }
         return pessoa;
-    }
+}
       
 }

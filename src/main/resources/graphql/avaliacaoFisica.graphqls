@@ -1,0 +1,45 @@
+type AvaliacaoFisica {
+        id: Int,
+        aluno: Aluno,
+        objetivo: String,
+        idate: Int,
+        data: String,
+        altura: String,
+        peso: Float,
+        peitoral: String,
+        biceps: String,
+        anteBraco: String,
+        cintura: String,
+        abdome: String,
+        quadril: String,
+        coxa: String,
+        fotoFrente: String,
+        fotoLado: String,
+        fotoCostas: String
+}
+input AvaliacaoFisicaInput {
+        id: Int!,
+        aluno: Int!,
+        objetivo: String!,
+        idate: Int!,
+        data: String!,
+        altura: String!,
+        peso: Float!,
+        peitoral: String!,
+        biceps: String!,
+        anteBraco: String!,
+        cintura: String!,
+        abdome: String!,
+        quadril: String!,
+        coxa: String!,
+        fotoFrente: String!,
+        fotoLado: String!,
+        fotoCostas: String!
+}
+extend type Query {
+        obterAvaliacaoPorAluno(alunoId: Int!):[AvaliacaoFisica]!
+}
+
+extend type Mutation{
+        salvarAvaliacao(avaliacao:AvaliacaoFisicaInput!): AvaliacaoFisica!    
+}

@@ -8,7 +8,11 @@ import com.geradorcodigo.geradorcodigo.Model.Aluno;
 import com.geradorcodigo.geradorcodigo.Model.AlunoInput;
 import com.geradorcodigo.geradorcodigo.Model.Objetivo;
 import com.geradorcodigo.geradorcodigo.Model.Personal;
+import com.geradorcodigo.geradorcodigo.Model.Pessoa;
+import com.geradorcodigo.geradorcodigo.Model.Usuario;
 import com.geradorcodigo.geradorcodigo.Repository.AlunoRepository;
+import com.geradorcodigo.geradorcodigo.Repository.PessoaRepository;
+import com.geradorcodigo.geradorcodigo.Repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +22,12 @@ public class AlunoGraphQl implements GraphQLQueryResolver, GraphQLMutationResolv
 
     @Autowired
     private AlunoRepository alunoRepo;
+
+    @Autowired
+    private PessoaRepository pessoaRepo;
+
+    @Autowired
+    private UsuarioRepository usuarioRepo;
 
 
     public List<Aluno> obterAlunosProfessor(int professorId){
@@ -56,6 +66,27 @@ public class AlunoGraphQl implements GraphQLQueryResolver, GraphQLMutationResolv
 
         if(aluno.getId() == 0){
             aluno = alunoRepo.salvarAluno(aluno);
+
+            System.out.println("Id retornado = " + aluno.getId());
+            System.out.println(alunoInput.getCpf());
+
+            Pessoa pessoa = new Pessoa();
+            Usuario usuario = new Usuario();
+
+            pessoa.setAluno(aluno);
+            pessoa.setCpf(alunoInput.getCpf());
+            pessoa.setEmail(alunoInput.getEmail());
+            pessoa.setNome(alunoInput.getNome());
+
+            pessoa = pessoaRepo.salvarPessoa(pessoa);
+
+            usuario.setPessoa(pessoa);
+            usuario.setLogin(alunoInput.getEmail());
+            usuario.setSenha("123");
+
+            usuarioRepo.salvarUsuario(usuario);
+
+
         }
         return aluno;
     }

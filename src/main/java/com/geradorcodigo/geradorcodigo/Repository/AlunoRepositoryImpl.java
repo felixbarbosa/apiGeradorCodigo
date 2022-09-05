@@ -1,5 +1,6 @@
 package com.geradorcodigo.geradorcodigo.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -10,11 +11,14 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.geradorcodigo.geradorcodigo.Model.Aluno;
 import com.geradorcodigo.geradorcodigo.Model.Objetivo;
 import com.geradorcodigo.geradorcodigo.Model.Personal;
+import com.geradorcodigo.geradorcodigo.Model.Pessoa;
 
 @Repository
 public class AlunoRepositoryImpl implements AlunoRepository{
@@ -23,8 +27,8 @@ public class AlunoRepositoryImpl implements AlunoRepository{
     "?";
     private static String SELECT_ALUNO_ID = "select * from mc_aluno where id = " +
     "?";
-    private static String INSERT = " insert into mc_aluno (nome, cpf, login, senha, sexo, idade, email, personal, objetivo) "
-            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+    private static String INSERT = " insert into mc_aluno (id, nome, cpf, login, senha, sexo, idade, email, personal, objetivo) "
+            + " values (nextval('mc_aluno_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
 
     @Autowired
@@ -43,8 +47,30 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
     public Aluno salvarAluno(Aluno aluno) {
 
-        jbdcTemplate.update(INSERT, new Object[] {aluno.getNome(), aluno.getCpf(), aluno.getLogin(), aluno.getSenha(), 
-        aluno.getSexo(), aluno.getIdade(), aluno.getEmail(), aluno.getPersonal().getId(), aluno.getObjetivo().getId()});
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int idGerado = 0;
+
+        //jbdcTemplate.update(INSERT, new Object[] {aluno.getNome(), aluno.getCpf(), aluno.getLogin(), aluno.getSenha(), 
+        //aluno.getSexo(), aluno.getIdade(), aluno.getEmail(), aluno.getPersonal().getId(), aluno.getObjetivo().getId()}, keyHolder);
+
+        jbdcTemplate.update(
+            connection -> {
+                PreparedStatement ps = connection.prepareStatement(INSERT, new String[]{"id"});
+                ps.setString(1, aluno.getNome());
+                ps.setString(2, aluno.getCpf());
+                ps.setString(3, aluno.getLogin());
+                ps.setString(4, aluno.getSenha());
+                ps.setString(5, aluno.getSexo());
+                ps.setInt(6, aluno.getIdade());
+                ps.setString(7, aluno.getEmail());
+                ps.setInt(8, aluno.getPersonal().getId());
+                ps.setInt(9, aluno.getObjetivo().getId());
+                return ps;
+            }, keyHolder);
+
+        idGerado = keyHolder.getKey().intValue();
+
+        aluno.setId(idGerado);
 
         return aluno;
     }
