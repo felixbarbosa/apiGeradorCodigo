@@ -82,7 +82,7 @@ public class AlunoGraphQl implements GraphQLQueryResolver, GraphQLMutationResolv
 
             usuario.setPessoa(pessoa);
             usuario.setLogin(alunoInput.getEmail());
-            usuario.setSenha("123");
+            usuario.setSenha(alunoInput.getSenha());
 
             usuarioRepo.salvarUsuario(usuario);
 

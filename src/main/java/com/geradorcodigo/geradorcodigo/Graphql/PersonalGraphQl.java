@@ -69,7 +69,7 @@ public class PersonalGraphQl implements GraphQLQueryResolver, GraphQLMutationRes
 
             usuario.setPessoa(pessoa);
             usuario.setLogin(personalInput.getEmail());
-            usuario.setSenha("123");
+            usuario.setSenha(personalInput.getSenha());
 
             usuarioRepo.salvarUsuario(usuario);
         }else{
