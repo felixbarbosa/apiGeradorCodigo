@@ -1,0 +1,51 @@
+type Anamnese {
+        id: Int,
+        aluno: Aluno,
+        objetivo: String,
+        atividadeFisica: String,
+        refeicoes: String,
+        dieta: String,
+        suplementacao: String,
+        sono: String,
+        fumante: String,
+        bebidaAlcoolica: String,
+        colesterol: String,
+        alteracaoCardiaca: String,
+        diabetes: String,
+        hipertenso: String,
+        pulmonar: String,
+        medicamento: String,
+        cirurgia: String,
+        dores: String,
+        problemaOrtopedico: String,
+        observacoes: String
+}
+input AnamneseInput {
+        id: Int!,
+        aluno: Int!,
+        objetivo: String!,
+        atividadeFisica: String!,
+        refeicoes: String!,
+        dieta: String!,
+        suplementacao: String!,
+        sono: String!,
+        fumante: String!,
+        bebidaAlcoolica: String!,
+        colesterol: String!,
+        alteracaoCardiaca: String!,
+        diabetes: String!,
+        hipertenso: String!,
+        pulmonar: String!,
+        medicamento: String!,
+        cirurgia: String!,
+        dores: String!,
+        problemaOrtopedico: String!,
+        observacoes: String!
+}
+extend type Query {
+        obterAnamnesePorAluno(alunoId: Int!):[Anamnese]!
+}
+
+extend type Mutation{
+        salvarAnamnese(anamnese:AnamneseInput!): Anamnese!    
+}
