@@ -62,8 +62,8 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "where mc_musculo.id = ? and mc_aluno.id = ?";
 
     private static String INSERT = "insert into mc_treino (nome, exercicio, aluno, repeticoes, velocidade, "
-            + "descanso, musculo, \"diaSemana\", series, instrucao, variacaoexercicio) "
-            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+            + "descanso, musculo, \"diaSemana\", series, variacaoexercicio) "
+            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     private static String UPDATE = " update mc_treino set exercicio = ? where id = ?";  
 
     @Autowired
