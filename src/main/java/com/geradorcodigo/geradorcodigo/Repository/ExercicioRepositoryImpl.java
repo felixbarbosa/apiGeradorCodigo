@@ -43,12 +43,12 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
     public Exercicio salvarExercicio(Exercicio exercicio) {
 
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+        //KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {exercicio.getDescricao(), 
-        exercicio.getMusculo().getId(), exercicio.getProfessor().getId(), exercicio.getUrlImagem(), exercicio.getUrlVideo(), exercicio.getInstrucao()}, keyHolder);
+        exercicio.getMusculo().getId(), exercicio.getProfessor().getId(), exercicio.getUrlImagem(), exercicio.getUrlVideo(), exercicio.getInstrucao()});
 
-        System.out.println("Id gerado = " + keyHolder.getKey());
+        //System.out.println("Id gerado = " + keyHolder.getKey());
         
         return exercicio;
     }
