@@ -19,7 +19,7 @@ input ExercicioInput {
 }
 extend type Query {
         obterExercicioPorId(id:Int!):Exercicio!
-        obterExerciciosPorMusculo(musculoId:Int!):[Exercicio]!
+        obterExerciciosPorMusculo(musculoId:Int!, professorId: Int!):[Exercicio]!
         obterExerciciosVariacoes(professorId:Int!):[Exercicio]!
         obterExercicios(professorId:Int!):[Exercicio]!
 }

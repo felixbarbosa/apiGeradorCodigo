@@ -32,9 +32,9 @@ public class ExercicioGraphQl implements GraphQLQueryResolver, GraphQLMutationRe
         return lista;    
     }
 
-    public List<Exercicio> obterExerciciosPorMusculo(int musculoId){
+    public List<Exercicio> obterExerciciosPorMusculo(int musculoId, int professorId){
 
-        List<Exercicio> lista = exercicioRepo.obterExerciciosPorMusculo(musculoId);
+        List<Exercicio> lista = exercicioRepo.obterExerciciosPorMusculo(musculoId, professorId);
         return lista;    
     }
 

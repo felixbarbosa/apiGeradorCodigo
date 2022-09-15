@@ -21,7 +21,8 @@ import com.geradorcodigo.geradorcodigo.Model.VariacoesExercicios;
 public class ExercicioRepositoryImpl implements ExercicioRepository{
 
     private static String SELECT_EXERCICIO_ID = "select * from mc_exercicio where id = ?";
-    private static String SELECT_EXERCICIO_MUSCULO = "select * from mc_exercicio where musculo = ?";
+    private static String SELECT_EXERCICIO_MUSCULO = "select * from mc_exercicio where musculo = ? "
+    + "and professor = 5 or professor = ?";
     private static String SELECT_EXERCICIOS_GERAIS = "select * from mc_exercicio where professor = 5 or professor = ?";
     private static String SELECT_EXERCICIOS_VARIACOES = "select mc_exercicio.id as exercicioid, mc_exercicio.descricao as exercicio, " 
     + "mc_variacoes_exercicios.id as variacaoid, mc_exercicio.professor, mc_exercicio.musculo, "
@@ -168,7 +169,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
         }, professorId);
     }
 
-    public List<Exercicio> obterExerciciosPorMusculo(int musculoId){
+    public List<Exercicio> obterExerciciosPorMusculo(int musculoId, int professorId){
 
         return jbdcTemplate.query(SELECT_EXERCICIO_MUSCULO, new RowMapper<Exercicio>(){
 
@@ -195,7 +196,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
                 return exercicio;
 
             }
-        }, musculoId);
+        }, musculoId, professorId);
     }
 
     public List<Exercicio> obterExerciciosVariacoes(int professorId){
