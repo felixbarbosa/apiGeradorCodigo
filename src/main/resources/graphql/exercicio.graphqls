@@ -5,7 +5,8 @@ type Exercicio {
         professor: Personal!,
         urlImagem: String,
         urlVideo: String,
-        instrucao: String
+        instrucao: String,
+        variacoes: VariacoesExercicios
 }
 input ExercicioInput {
         id: Int!,
@@ -14,12 +15,13 @@ input ExercicioInput {
         professor: Int!,
         urlImagem: String,
         urlVideo: String,
-        instrucao: String
+        instrucao: String,
 }
 extend type Query {
         obterExercicioPorId(id:Int!):Exercicio!
         obterExerciciosPorMusculo(musculoId:Int!):[Exercicio]!
-        obterExercicios:[Exercicio]!
+        obterExerciciosVariacoes(professorId:Int!):[Exercicio]!
+        obterExercicios(professorId:Int!):[Exercicio]!
 }
 
 extend type Mutation{

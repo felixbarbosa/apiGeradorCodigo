@@ -34,9 +34,6 @@ public class VariacoesExerciciosRepositoryImpl implements VariacoesExerciciosRep
     @Autowired
     private MusculoRepository musculoRepo;
 
-    @Autowired
-    private ExercicioRepository exercicioRepo;
-
     
     public void setDataSource(DataSource dataSource){
         this.jbdcTemplate = new JdbcTemplate(dataSource);
@@ -67,7 +64,8 @@ public class VariacoesExerciciosRepositoryImpl implements VariacoesExerciciosRep
                 musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
                 variacoes.setMusculo(musculo);
 
-                exercicio = exercicioRepo.obterExercicioPorId(rs.getInt("exercicio"));
+                //exercicio = exercicioRepo.obterExercicioPorId(rs.getInt("exercicio"));
+                exercicio.setId(rs.getInt("exercicio"));
                 variacoes.setExercicio(exercicio);
                 
                 return variacoes;
@@ -93,7 +91,7 @@ public class VariacoesExerciciosRepositoryImpl implements VariacoesExerciciosRep
                 musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
                 variacoes.setMusculo(musculo);
 
-                exercicio = exercicioRepo.obterExercicioPorId(rs.getInt("exercicio"));
+                exercicio.setId(rs.getInt("exercicio"));
                 variacoes.setExercicio(exercicio);
                 
                 return variacoes;
@@ -119,7 +117,7 @@ public class VariacoesExerciciosRepositoryImpl implements VariacoesExerciciosRep
                 musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
                 variacoes.setMusculo(musculo);
 
-                exercicio = exercicioRepo.obterExercicioPorId(rs.getInt("exercicio"));
+                exercicio.setId(rs.getInt("exercicio"));
                 variacoes.setExercicio(exercicio);
                 
                 return variacoes;

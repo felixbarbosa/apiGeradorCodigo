@@ -9,6 +9,7 @@ public class Exercicio {
     private String urlImagem;
     private String urlVideo;
     private String instrucao;
+    private VariacoesExercicios variacoes;
     
     public String getUrlVideo() {
         return urlVideo;
@@ -51,6 +52,12 @@ public String getUrlImagem() {
 }
 public void setUrlImagem(String urlImagem) {
         this.urlImagem = urlImagem;
+}
+public VariacoesExercicios getVariacoes() {
+        return variacoes;
+}
+public void setVariacoes(VariacoesExercicios variacoes) {
+        this.variacoes = variacoes;
 }
     
     

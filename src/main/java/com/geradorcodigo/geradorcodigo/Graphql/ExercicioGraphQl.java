@@ -20,9 +20,15 @@ public class ExercicioGraphQl implements GraphQLQueryResolver, GraphQLMutationRe
     private ExercicioRepository exercicioRepo;
 
 
-    public List<Exercicio> obterExercicios(){
+    public List<Exercicio> obterExercicios(int professorId){
 
-        List<Exercicio> lista = exercicioRepo.obterExercicios();
+        List<Exercicio> lista = exercicioRepo.obterExercicios(professorId);
+        return lista;    
+    }
+
+    public List<Exercicio> obterExerciciosVariacoes(int professorId){
+
+        List<Exercicio> lista = exercicioRepo.obterExerciciosVariacoes(professorId);
         return lista;    
     }
 

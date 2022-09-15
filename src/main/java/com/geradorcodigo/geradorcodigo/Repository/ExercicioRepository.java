@@ -6,13 +6,13 @@ import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 
 public interface ExercicioRepository {
     
-    List<Exercicio> obterExercicios();
+    List<Exercicio> obterExercicios(int professorId);
 
     List<Exercicio> obterExerciciosPorMusculo(int musculoId);
 
-    Exercicio obterExercicioPorId(int id);
+    List<Exercicio> obterExerciciosVariacoes(int professorId);
 
-    //List<Exercicio> obterEntregasRealizadas();
+    Exercicio obterExercicioPorId(int id);
 
     Exercicio salvarExercicio(Exercicio exercicio);
 
