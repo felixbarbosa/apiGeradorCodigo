@@ -8,7 +8,6 @@ type Aluno {
         email: String!,
         idade: Int!,
         personal: Personal!,
-        objetivo: Objetivo!
 }
 input AlunoInput {
         id: Int!,
@@ -20,7 +19,6 @@ input AlunoInput {
         email: String!,
         idade: Int!,
         personal: Int!,
-        objetivo: Int!
 }
 extend type Query {
         obterAlunosProfessor(professorId: Int!):[Aluno]!

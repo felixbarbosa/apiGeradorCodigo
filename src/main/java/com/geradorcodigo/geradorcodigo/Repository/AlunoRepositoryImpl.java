@@ -27,8 +27,8 @@ public class AlunoRepositoryImpl implements AlunoRepository{
     "?";
     private static String SELECT_ALUNO_ID = "select * from mc_aluno where id = " +
     "?";
-    private static String INSERT = " insert into mc_aluno (id, nome, cpf, login, senha, sexo, idade, email, personal, objetivo) "
-            + " values (nextval('mc_aluno_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+    private static String INSERT = " insert into mc_aluno (id, nome, cpf, login, senha, sexo, idade, email, personal) "
+            + " values (nextval('mc_aluno_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?) ";
     //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
 
     @Autowired
@@ -64,7 +64,6 @@ public class AlunoRepositoryImpl implements AlunoRepository{
                 ps.setInt(6, aluno.getIdade());
                 ps.setString(7, aluno.getEmail());
                 ps.setInt(8, aluno.getPersonal().getId());
-                ps.setInt(9, aluno.getObjetivo().getId());
                 return ps;
             }, keyHolder);
 
@@ -90,7 +89,6 @@ public class AlunoRepositoryImpl implements AlunoRepository{
                 
                 Aluno aluno = new Aluno();
                 Personal personal = new Personal();
-                Objetivo objetivo = new Objetivo();
 
                 aluno.setId(rs.getInt("id"));
                 aluno.setCpf(rs.getString("cpf"));
@@ -101,9 +99,6 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
                 personal = personalRepo.obterPersonalPorId(rs.getInt("personal"));
                 aluno.setPersonal(personal);
-
-                objetivo = objetivoRepo.obterObjetivoPorId(rs.getInt("objetivo"));
-                aluno.setObjetivo(objetivo);
 
                 aluno.setSenha(rs.getString("senha"));
                 aluno.setSexo(rs.getString("sexo"));
@@ -127,7 +122,6 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
                 Aluno aluno = new Aluno();
                 Personal personal = new Personal();
-                Objetivo objetivo = new Objetivo();
 
                 aluno.setId(rs.getInt("id"));
                 aluno.setCpf(rs.getString("cpf"));
@@ -138,9 +132,6 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
                 personal.setId(rs.getInt("personal"));
                 aluno.setPersonal(personal);
-
-                objetivo = objetivoRepo.obterObjetivoPorId(rs.getInt("objetivo"));
-                aluno.setObjetivo(objetivo);
 
                 aluno.setSenha(rs.getString("senha"));
                 aluno.setSexo(rs.getString("sexo"));
