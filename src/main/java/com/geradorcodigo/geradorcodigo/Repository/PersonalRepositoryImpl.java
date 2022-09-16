@@ -21,8 +21,8 @@ public class PersonalRepositoryImpl implements PersonalRepository{
 
     private static String SELECT_PERSONAIS = "select * from mc_personal";
     private static String SELECT_PERSONAL_ID = "select * from mc_personal where id = ?";
-    private static String INSERT = " insert into mc_personal (id, nome, cpf, login, senha, sexo, idade, email, cref) "
-            + " values (nextval('mc_personal_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?) ";
+    private static String INSERT = " insert into mc_personal (id, nome, cpf, login, senha, sexo, idade, email, cref, foto) "
+            + " values (nextval('mc_personal_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     private static String UPDATE = " update mc_personal set nome = ? where id = ?";  
 
     @Autowired
@@ -49,6 +49,7 @@ public class PersonalRepositoryImpl implements PersonalRepository{
                 ps.setInt(6, personal.getIdade());
                 ps.setString(7, personal.getEmail());
                 ps.setString(8, personal.getCref());
+                ps.setString(9, personal.getFoto());
                 return ps;
             }, keyHolder);
 
@@ -86,6 +87,7 @@ public class PersonalRepositoryImpl implements PersonalRepository{
                 personal.setSenha(rs.getString("senha"));
                 personal.setSexo(rs.getString("sexo"));
                 personal.setCref(rs.getString("cref"));
+                personal.setFoto(rs.getString("foto"));
 
                 return personal;
             }
@@ -111,6 +113,7 @@ public class PersonalRepositoryImpl implements PersonalRepository{
                 personal.setSenha(rs.getString("senha"));
                 personal.setSexo(rs.getString("sexo"));
                 personal.setCref(rs.getString("cref"));
+                personal.setFoto(rs.getString("foto"));
                 
                 return personal;
 

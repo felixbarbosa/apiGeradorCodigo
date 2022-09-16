@@ -27,8 +27,8 @@ public class AlunoRepositoryImpl implements AlunoRepository{
     "?";
     private static String SELECT_ALUNO_ID = "select * from mc_aluno where id = " +
     "?";
-    private static String INSERT = " insert into mc_aluno (id, nome, cpf, login, senha, sexo, idade, email, personal) "
-            + " values (nextval('mc_aluno_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?) ";
+    private static String INSERT = " insert into mc_aluno (id, nome, cpf, login, senha, sexo, idade, email, personal, foto) "
+            + " values (nextval('mc_aluno_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
 
     @Autowired
@@ -64,6 +64,7 @@ public class AlunoRepositoryImpl implements AlunoRepository{
                 ps.setInt(6, aluno.getIdade());
                 ps.setString(7, aluno.getEmail());
                 ps.setInt(8, aluno.getPersonal().getId());
+                ps.setString(9, aluno.getFoto());
                 return ps;
             }, keyHolder);
 
@@ -102,6 +103,7 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
                 aluno.setSenha(rs.getString("senha"));
                 aluno.setSexo(rs.getString("sexo"));
+                aluno.setFoto(rs.getString("foto"));
 
                 return aluno;
             }
@@ -135,6 +137,7 @@ public class AlunoRepositoryImpl implements AlunoRepository{
 
                 aluno.setSenha(rs.getString("senha"));
                 aluno.setSexo(rs.getString("sexo"));
+                aluno.setFoto(rs.getString("foto"));
                 
                 return aluno;
 

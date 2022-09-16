@@ -11,7 +11,14 @@ public class Personal {
         private String email;
         private Integer idade;
         private String cref;
+        private String foto;
         
+        public String getFoto() {
+                return foto;
+        }
+        public void setFoto(String foto) {
+                this.foto = foto;
+        }
         public Integer getId() {
                 return id;
         }

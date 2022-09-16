@@ -9,7 +9,6 @@ type Treino {
         musculoAlvo: Musculo,
         diaSemana: DiaSemana
         series: String,
-        variacaoExercicio: VariacoesExercicios 
 }
 input TreinoInput {
         id: Int!,
@@ -22,7 +21,6 @@ input TreinoInput {
         musculoAlvo: Int!,
         diaSemana: Int!
         series: String!,
-        variacaoExercicio: Int
 }
 extend type Query {
         obterTreinoAluno(alunoId: Int!):[Treino]!

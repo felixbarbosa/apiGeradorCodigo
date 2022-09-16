@@ -12,7 +12,14 @@ public class AlunoInput {
         private Integer idade;
         private Integer personal;
         private Integer objetivo;
+        private String foto;
         
+        public String getFoto() {
+                return foto;
+        }
+        public void setFoto(String foto) {
+                this.foto = foto;
+        }
         public Integer getId() {
                 return id;
         }

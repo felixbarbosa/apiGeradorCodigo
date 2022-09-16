@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
 import com.geradorcodigo.geradorcodigo.Model.Personal;
-import com.geradorcodigo.geradorcodigo.Model.VariacoesExercicios;
 
 @Repository
 public class ExercicioRepositoryImpl implements ExercicioRepository{
@@ -24,13 +23,8 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
     private static String SELECT_EXERCICIO_MUSCULO = "select * from mc_exercicio where musculo = ? "
     + "and professor = 5 or professor = ?";
     private static String SELECT_EXERCICIOS_GERAIS = "select * from mc_exercicio where professor = 5 or professor = ?";
-    private static String SELECT_EXERCICIOS_VARIACOES = "select mc_exercicio.id as exercicioid, mc_exercicio.descricao as exercicio, " 
-    + "mc_variacoes_exercicios.id as variacaoid, mc_exercicio.professor, mc_exercicio.musculo, "
-    + "mc_exercicio.urlimage, mc_exercicio.urlvideo, mc_exercicio.instrucao from mc_exercicio left join mc_variacoes_exercicios "
-    + "on mc_variacoes_exercicios.exercicio = mc_exercicio.id "
-    + "where mc_exercicio.professor = 5 or mc_exercicio.professor = ?";
-    private static String INSERT_EXERCICIO = " insert into mc_exercicio (id, descricao, musculo, professor, urlimage, urlvideo, instrucao) values " +
-        " (nextval('mc_exercicio_id_seq'), ?, ?, ?, ?, ?, ?) ";
+    private static String INSERT_EXERCICIO = " insert into mc_exercicio (id, descricao, musculo, professor, urlimage, urlvideo, instrucao, isvariacao) values " +
+        " (nextval('mc_exercicio_id_seq'), ?, ?, ?, ?, ?, ?, ?) ";
     private static String UPDATE = " update mc_exercicio set descricao = ?, musculo = ?, urlimage = ?, urlvideo = ?, instrucao = ? where id = ?";
     private static String REMOVE = " delete from mc_exercicio where id = ?";  
 
@@ -43,9 +37,6 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
     @Autowired 
     private PersonalRepository personalRepo;
 
-    @Autowired 
-    private VariacoesExerciciosRepository variacoesRepo;
-
     
     public void setDataSource(DataSource dataSource){
         this.jbdcTemplate = new JdbcTemplate(dataSource);
@@ -55,8 +46,15 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
         //KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {exercicio.getDescricao(), 
-        exercicio.getMusculo().getId(), exercicio.getProfessor().getId(), exercicio.getUrlImagem(), exercicio.getUrlVideo(), exercicio.getInstrucao()});
+        jbdcTemplate.update(INSERT_EXERCICIO, new Object[] {
+            exercicio.getDescricao(), 
+            exercicio.getMusculo().getId(), 
+            exercicio.getProfessor().getId(), 
+            exercicio.getUrlImagem(), 
+            exercicio.getUrlVideo(), 
+            exercicio.getInstrucao(), 
+            exercicio.getIsVariacao() == 1 ? true : false
+        });
 
         //System.out.println("Id gerado = " + keyHolder.getKey());
         
@@ -85,6 +83,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
                 exercicio.setUrlImagem(rs.getString("urlimage"));
                 exercicio.setUrlVideo(rs.getString("urlvideo"));
                 exercicio.setInstrucao(rs.getString("instrucao"));
+                exercicio.setIsVariacao(rs.getBoolean("isvariacao") == true ? 1 : 0);
 
                 return exercicio;
             }
@@ -162,6 +161,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
                 exercicio.setUrlImagem(rs.getString("urlimage"));
                 exercicio.setUrlVideo(rs.getString("urlvideo"));
                 exercicio.setInstrucao(rs.getString("instrucao"));
+                exercicio.setIsVariacao(rs.getBoolean("isvariacao") == true ? 1 : 0);
                 
                 return exercicio;
 
@@ -192,51 +192,12 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
                 exercicio.setUrlImagem(rs.getString("urlimage"));
                 exercicio.setUrlVideo(rs.getString("urlvideo"));
                 exercicio.setInstrucao(rs.getString("instrucao"));
+                exercicio.setIsVariacao(rs.getBoolean("isvariacao") == true ? 1 : 0);
                 
                 return exercicio;
 
             }
         }, musculoId, professorId);
-    }
-
-    public List<Exercicio> obterExerciciosVariacoes(int professorId){
-
-        return jbdcTemplate.query(SELECT_EXERCICIOS_VARIACOES, new RowMapper<Exercicio>(){
-
-            @Override
-            public Exercicio mapRow(ResultSet rs, int rownumber) throws SQLException{
-
-                Exercicio exercicio = new Exercicio();
-                Musculo musculo = new Musculo();
-                Personal professor = new Personal();
-                VariacoesExercicios variacoes = new VariacoesExercicios();
-
-                professor = personalRepo.obterPersonalPorId(rs.getInt("professor"));
-                exercicio.setProfessor(professor);
-
-                exercicio.setId(rs.getInt("exercicioid"));
-                exercicio.setDescricao(rs.getString("exercicio"));
-
-                musculo = musculoRepo.obterMusculoPorId(rs.getInt("musculo"));
-                exercicio.setMusculo(musculo);
-
-                exercicio.setUrlImagem(rs.getString("urlimage"));
-                exercicio.setUrlVideo(rs.getString("urlvideo"));
-                exercicio.setInstrucao(rs.getString("instrucao"));
-
-                System.out.println("Variacao Id = " + rs.getInt("variacaoid"));
-
-                if(rs.getInt("variacaoid") != 0){
-                    variacoes = variacoesRepo.obterVariacoesPorId(rs.getInt("variacaoid"));
-                    exercicio.setVariacoes(variacoes);
-                }
-
-                
-                
-                return exercicio;
-
-            }
-        }, professorId);
     }
      
 }

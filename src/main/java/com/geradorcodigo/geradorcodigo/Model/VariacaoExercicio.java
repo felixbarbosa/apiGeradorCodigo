@@ -1,6 +1,6 @@
 package com.geradorcodigo.geradorcodigo.Model;
 
-public class Exercicio {
+public class VariacaoExercicio {
 
     private Integer id;
     private String descricao;
@@ -10,6 +10,7 @@ public class Exercicio {
     private String urlVideo;
     private String instrucao;
     private Integer isVariacao;
+    private Exercicio exercicio;
     
     public String getUrlVideo() {
         return urlVideo;
@@ -52,6 +53,13 @@ public String getUrlImagem() {
 }
 public void setUrlImagem(String urlImagem) {
         this.urlImagem = urlImagem;
+}
+
+public Exercicio getExercicio() {
+        return exercicio;
+}
+public void setExercicio(Exercicio exercicio) {
+        this.exercicio = exercicio;
 }
 public Integer getIsVariacao() {
         return isVariacao;

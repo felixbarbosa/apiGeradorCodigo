@@ -12,7 +12,14 @@ public class Aluno {
     private int idade;
     private Personal personal;
     private Objetivo objetivo;
+    private String foto;
     
+public String getFoto() {
+        return foto;
+}
+public void setFoto(String foto) {
+        this.foto = foto;
+}
 public int getId() {
         return id;
 }

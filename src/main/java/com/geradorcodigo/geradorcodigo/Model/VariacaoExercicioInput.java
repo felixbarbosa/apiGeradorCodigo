@@ -1,15 +1,16 @@
 package com.geradorcodigo.geradorcodigo.Model;
 
-public class Exercicio {
+public class VariacaoExercicioInput {
 
     private Integer id;
     private String descricao;
-    private Musculo musculo;
-    private Personal professor;
+    private Integer musculo;
+    private Integer professor;
     private String urlImagem;
     private String urlVideo;
     private String instrucao;
     private Integer isVariacao;
+    private Integer exercicio;
     
     public String getUrlVideo() {
         return urlVideo;
@@ -35,16 +36,16 @@ public String getDescricao() {
 public void setDescricao(String descricao) {
         this.descricao = descricao;
 }
-public Musculo getMusculo() {
+public Integer getMusculo() {
         return musculo;
 }
-public void setMusculo(Musculo musculo) {
+public void setMusculo(Integer musculo) {
         this.musculo = musculo;
 }
-public Personal getProfessor() {
+public Integer getProfessor() {
         return professor;
 }
-public void setProfessor(Personal professor) {
+public void setProfessor(Integer professor) {
         this.professor = professor;
 }
 public String getUrlImagem() {
@@ -58,6 +59,12 @@ public Integer getIsVariacao() {
 }
 public void setIsVariacao(Integer isVariacao) {
         this.isVariacao = isVariacao;
+}
+public Integer getExercicio() {
+        return exercicio;
+}
+public void setExercicio(Integer exercicio) {
+        this.exercicio = exercicio;
 }
 
     

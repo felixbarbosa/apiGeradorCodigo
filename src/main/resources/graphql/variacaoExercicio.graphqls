@@ -1,0 +1,32 @@
+type VariacaoExercicio {
+        id: Int!,
+        descricao: String!,
+        musculo: Musculo!,
+        professor: Personal!,
+        urlImagem: String,
+        urlVideo: String,
+        instrucao: String,
+        isVariacao: Int!,
+        exercicio: Exercicio
+}
+input VariacaoExercicioInput {
+        id: Int!,
+        descricao: String!,
+        musculo: Int!,
+        professor: Int!,
+        urlImagem: String,
+        urlVideo: String,
+        instrucao: String,
+        isVariacao: Int!,
+        exercicio: Int!
+}
+extend type Query {
+        obterVariacaoExercicioPorId(id:Int!):VariacaoExercicio!
+        obterVariacoesExerciciosPorExercicio(exercicioId:Int!, professorId: Int!):[VariacaoExercicio]!
+        obterVariacoesExercicios(professorId:Int!):[VariacaoExercicio]!
+}
+
+extend type Mutation{
+        salvarVariacaoExercicio(variacaoExercicio:VariacaoExercicioInput!): VariacaoExercicio!
+        deletarVariacaoExercicio(id: Int!): Boolean 
+}

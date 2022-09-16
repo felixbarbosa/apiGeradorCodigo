@@ -10,8 +10,6 @@ public interface ExercicioRepository {
 
     List<Exercicio> obterExerciciosPorMusculo(int musculoId, int professorId);
 
-    List<Exercicio> obterExerciciosVariacoes(int professorId);
-
     Exercicio obterExercicioPorId(int id);
 
     Exercicio salvarExercicio(Exercicio exercicio);

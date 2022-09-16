@@ -26,12 +26,6 @@ public class ExercicioGraphQl implements GraphQLQueryResolver, GraphQLMutationRe
         return lista;    
     }
 
-    public List<Exercicio> obterExerciciosVariacoes(int professorId){
-
-        List<Exercicio> lista = exercicioRepo.obterExerciciosVariacoes(professorId);
-        return lista;    
-    }
-
     public List<Exercicio> obterExerciciosPorMusculo(int musculoId, int professorId){
 
         List<Exercicio> lista = exercicioRepo.obterExerciciosPorMusculo(musculoId, professorId);
@@ -62,6 +56,7 @@ public class ExercicioGraphQl implements GraphQLQueryResolver, GraphQLMutationRe
         exercicio.setUrlImagem(exercicioInput.getUrlImagem());
         exercicio.setUrlVideo(exercicioInput.getUrlVideo());
         exercicio.setInstrucao(exercicioInput.getInstrucao());
+        exercicio.setIsVariacao(exercicioInput.getIsVariacao());
 
         if(exercicio.getId() == 0){
             exercicio = exercicioRepo.salvarExercicio(exercicio);

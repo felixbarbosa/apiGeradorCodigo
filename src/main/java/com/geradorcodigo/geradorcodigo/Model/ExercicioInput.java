@@ -9,6 +9,7 @@ public class ExercicioInput {
         private String urlImagem;
         private String urlVideo;
         private String instrucao;
+        private Integer isVariacao;
         
         public String getUrlImagem() {
                 return urlImagem;
@@ -51,6 +52,12 @@ public class ExercicioInput {
         }
         public void setProfessor(Integer professor) {
                 this.professor = professor;
+        }
+        public Integer getIsVariacao() {
+                return isVariacao;
+        }
+        public void setIsVariacao(Integer isVariacao) {
+                this.isVariacao = isVariacao;
         }
         
         

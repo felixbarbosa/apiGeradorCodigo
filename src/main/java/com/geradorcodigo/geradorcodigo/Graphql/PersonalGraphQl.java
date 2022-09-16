@@ -53,6 +53,7 @@ public class PersonalGraphQl implements GraphQLQueryResolver, GraphQLMutationRes
         personal.setCref(personalInput.getCref());
         personal.setSenha(personalInput.getSenha());
         personal.setSexo(personalInput.getSexo());
+        personal.setFoto(personalInput.getFoto());
 
         if(personal.getId() == 0){
             personal = personalRepo.salvarPersonal(personal);

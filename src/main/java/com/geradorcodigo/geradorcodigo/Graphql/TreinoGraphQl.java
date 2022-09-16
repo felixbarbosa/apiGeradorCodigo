@@ -10,7 +10,6 @@ import com.geradorcodigo.geradorcodigo.Model.Exercicio;
 import com.geradorcodigo.geradorcodigo.Model.Musculo;
 import com.geradorcodigo.geradorcodigo.Model.Treino;
 import com.geradorcodigo.geradorcodigo.Model.TreinoInput;
-import com.geradorcodigo.geradorcodigo.Model.VariacoesExercicios;
 import com.geradorcodigo.geradorcodigo.Repository.TreinoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,6 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         DiaSemana diaSemana = new DiaSemana();
         Exercicio exercicio = new Exercicio();
         Musculo musculo = new Musculo();
-        VariacoesExercicios variacao = new VariacoesExercicios();
 
         treino.setId(treinoInput.getId());
 
@@ -77,9 +75,6 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
 
         musculo.setId(treinoInput.getMusculoAlvo());
         treino.setMusculoAlvo(musculo);
-
-        variacao.setId(treinoInput.getVariacaoExercicio());
-        treino.setVariacaoExercicio(variacao);
 
         treino.setNome(treinoInput.getNome());
 

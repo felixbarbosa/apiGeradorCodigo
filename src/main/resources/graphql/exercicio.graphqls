@@ -6,7 +6,7 @@ type Exercicio {
         urlImagem: String,
         urlVideo: String,
         instrucao: String,
-        variacoes: VariacoesExercicios
+        isVariacao: Int!
 }
 input ExercicioInput {
         id: Int!,
@@ -16,11 +16,11 @@ input ExercicioInput {
         urlImagem: String,
         urlVideo: String,
         instrucao: String,
+        isVariacao: Int!
 }
 extend type Query {
         obterExercicioPorId(id:Int!):Exercicio!
         obterExerciciosPorMusculo(musculoId:Int!, professorId: Int!):[Exercicio]!
-        obterExerciciosVariacoes(professorId:Int!):[Exercicio]!
         obterExercicios(professorId:Int!):[Exercicio]!
 }
 

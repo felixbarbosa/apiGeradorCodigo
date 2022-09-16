@@ -12,7 +12,6 @@ public class Treino {
     private Musculo musculoAlvo;
     private DiaSemana diaSemana;
     private String series;
-    private VariacoesExercicios variacaoExercicio;
     
 public Integer getId() {
             return id;
@@ -73,12 +72,6 @@ public String getSeries() {
 }
 public void setSeries(String series) {
         this.series = series;
-}
-public VariacoesExercicios getVariacaoExercicio() {
-        return variacaoExercicio;
-}
-public void setVariacaoExercicio(VariacoesExercicios variacaoExercicio) {
-        this.variacaoExercicio = variacaoExercicio;
 }
 
     

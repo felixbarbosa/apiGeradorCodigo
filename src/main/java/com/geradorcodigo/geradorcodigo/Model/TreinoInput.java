@@ -12,14 +12,7 @@ public class TreinoInput {
         private Integer musculoAlvo;
         private Integer diaSemana;
         private String series;
-        private Integer variacaoExercicio;
         
-        public Integer getVariacaoExercicio() {
-                return variacaoExercicio;
-        }
-        public void setVariacaoExercicio(Integer variacaoExercicio) {
-                this.variacaoExercicio = variacaoExercicio;
-        }
         public Integer getId() {
                 return id;
         }
