@@ -21,7 +21,7 @@ public class ExercicioRepositoryImpl implements ExercicioRepository{
 
     private static String SELECT_EXERCICIO_ID = "select * from mc_exercicio where id = ?";
     private static String SELECT_EXERCICIO_MUSCULO = "select * from mc_exercicio where musculo = ? "
-    + "and professor = 5 or professor = ?";
+    + "and (professor = 5 or professor = ?)";
     private static String SELECT_EXERCICIOS_GERAIS = "select * from mc_exercicio where professor = 5 or professor = ?";
     private static String INSERT_EXERCICIO = " insert into mc_exercicio (id, descricao, musculo, professor, urlimage, urlvideo, instrucao, isvariacao) values " +
         " (nextval('mc_exercicio_id_seq'), ?, ?, ?, ?, ?, ?, ?) ";

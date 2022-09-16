@@ -18,7 +18,7 @@ public class VariacaoExercicioRepositoryImpl implements VariacaoExercicioReposit
 
     private static String SELECT_VARIACAO_EXERCICIO_ID = "select * from mc_variacao_exercicio where id = ?";
     private static String SELECT_VARIACAO_EXERCICIO_EXERCICIO = "select * from mc_variacao_exercicio where exercicio = ? "
-    + "and professor = 5 or professor = ?";
+    + "and (professor = 5 or professor = ?)";
     private static String SELECT_VARIACAO_EXERCICIOS_GERAIS = "select * from mc_variacao_exercicio where professor = 5 or professor = ?";
     private static String INSERT_VARIACAO_EXERCICIO = " insert into mc_variacao_exercicio (id, descricao, musculo, professor, urlimage, urlvideo, instrucao, isvariacao, exercicio) values " +
         " (nextval('mc_exercicio_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?) ";
