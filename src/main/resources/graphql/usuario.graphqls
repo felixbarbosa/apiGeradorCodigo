@@ -2,13 +2,15 @@ type Usuario {
         id: Int!,
         login: String!,
         senha: String!,
-        pessoa: Pessoa
+        pessoa: Pessoa,
+        foto: String
 }
 input UsuarioInput {
         id: Int!,
         login: String!,
         senha: String!,
-        pessoa: Int!
+        pessoa: Int!,
+        foto: String!
 }
 extend type Query {
         obterUsuario(login: String!, senha: String!):[Usuario]!

@@ -6,6 +6,13 @@ public class Usuario {
     private String login;
     private String senha;
     private Pessoa pessoa;
+    public String getFoto() {
+        return foto;
+}
+public void setFoto(String foto) {
+        this.foto = foto;
+}
+private String foto;
     
 public int getId() {
         return id;

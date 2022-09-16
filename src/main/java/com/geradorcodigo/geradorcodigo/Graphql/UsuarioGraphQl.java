@@ -32,6 +32,7 @@ public class UsuarioGraphQl implements GraphQLQueryResolver, GraphQLMutationReso
         usuario.setId(usuarioInput.getId());
         usuario.setLogin(usuarioInput.getLogin());
         usuario.setSenha(usuarioInput.getSenha());
+        usuario.setFoto(usuarioInput.getFoto());
 
         pessoa.setId(usuarioInput.getPessoa());
         usuario.setPessoa(pessoa);

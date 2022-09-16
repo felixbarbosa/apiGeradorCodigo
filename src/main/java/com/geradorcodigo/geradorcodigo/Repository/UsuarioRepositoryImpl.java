@@ -20,8 +20,8 @@ import com.geradorcodigo.geradorcodigo.Model.Usuario;
 public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     private static String SELECT_USUARIO = "select * from mc_usuario where login = ? and senha = ?";
-    private static String INSERT = " insert into mc_usuario (id, login, senha, pessoa) "
-            + " values (nextval('mc_usuario_id_seq'), ?, ?, ?) ";
+    private static String INSERT = " insert into mc_usuario (id, login, senha, pessoa, foto) "
+            + " values (nextval('mc_usuario_id_seq'), ?, ?, ?, ?) ";
     //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
 
     @Autowired
@@ -40,7 +40,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     public Usuario salvarUsuario(Usuario usuario) {
 
-        jbdcTemplate.update(INSERT, new Object[] {usuario.getLogin(), usuario.getSenha(), usuario.getPessoa().getId()});
+        jbdcTemplate.update(INSERT, new Object[] {usuario.getLogin(), usuario.getSenha(), usuario.getPessoa().getId(), usuario.getFoto()});
 
         //SimpleEmail email = new SimpleEmail();
 
@@ -99,6 +99,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
                 usuario.setId(rs.getInt("id"));
                 usuario.setLogin(rs.getString("login"));
                 usuario.setSenha(rs.getString("senha"));
+                usuario.setFoto(rs.getString("foto"));
 
                 if(rs.getInt("pessoa") == 0){
                     usuario.setPessoa(null);

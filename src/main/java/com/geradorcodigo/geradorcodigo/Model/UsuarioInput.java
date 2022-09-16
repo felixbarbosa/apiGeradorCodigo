@@ -6,7 +6,14 @@ public class UsuarioInput {
     private String login;
     private String senha;
     private int pessoa;
+    private String foto;
     
+public String getFoto() {
+        return foto;
+}
+public void setFoto(String foto) {
+        this.foto = foto;
+}
 public int getId() {
         return id;
 }
