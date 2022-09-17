@@ -13,8 +13,9 @@ input CargaInput {
         data: String!
 }
 extend type Query {
-        obterCargasPorAluno(aluno: Int!):[Carga]!
-        obterCargasPorAlunoPorExercicio(aluno: Int!, exercicio: Int!):Carga
+        obterCargasPorAlunoPorExercicio(aluno: Int!, exercicio: Int!):[Carga]!
+        obterUltimaCargaPorAlunoPorExercicio(aluno: Int!, exercicio: Int!):Carga
+        obterPrimeiraCargaPorAlunoPorExercicio(aluno: Int!, exercicio: Int!):Carga
 }
 
 extend type Mutation{

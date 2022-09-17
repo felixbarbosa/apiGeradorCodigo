@@ -19,15 +19,21 @@ public class CargaGraphQl implements GraphQLQueryResolver, GraphQLMutationResolv
     @Autowired
     private CargaRepository cargaRepo;
 
-    public List<Carga> obterCargasPorAluno(int aluno){
+    public List<Carga> obterCargasPorAlunoPorExercicio(int aluno, int exercicio){
 
-        List<Carga> lista = cargaRepo.obterCargasPorAluno(aluno);
+        List<Carga> lista = cargaRepo.obterCargasPorAlunoPorExercicio(aluno, exercicio);
         return lista;    
     }
 
-    public Carga obterCargasPorAlunoPorExercicio(int aluno, int exercicio){
+    public Carga obterUltimaCargaPorAlunoPorExercicio(int aluno, int exercicio){
 
-        Carga carga = cargaRepo.obterCargaPorAlunoPorExercicio(aluno, exercicio);
+        Carga carga = cargaRepo.obterUltimaCargaPorAlunoPorExercicio(aluno, exercicio);
+        return carga;    
+    }
+
+    public Carga obterPrimeiraCargaPorAlunoPorExercicio(int aluno, int exercicio){
+
+        Carga carga = cargaRepo.obterPrimeiraCargaPorAlunoPorExercicio(aluno, exercicio);
         return carga;    
     }
 
