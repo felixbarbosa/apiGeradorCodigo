@@ -77,22 +77,15 @@ public class PersonalGraphQl implements GraphQLQueryResolver, GraphQLMutationRes
         }else{
             personal = personalRepo.atualizarPersonal(personal);
 
-            /*Pessoa pessoa = new Pessoa();
+            Pessoa pessoa = new Pessoa();
             Usuario usuario = new Usuario();
 
-            pessoa.setPersonal(personal);
-            pessoa.setCref(personalInput.getCref());
-            pessoa.setEmail(personalInput.getEmail());
-            pessoa.setNome(personalInput.getNome());
-
-            pessoa = pessoaRepo.editarPessoa(pessoa);
+            pessoa = pessoaRepo.obterPessoaPorPersonal(personalInput.getId());
 
             usuario.setPessoa(pessoa);
-            usuario.setLogin(personalInput.getEmail());
-            usuario.setSenha(personalInput.getSenha());
             usuario.setFoto(personalInput.getFoto());
 
-            usuarioRepo.editar(usuario);*/
+            usuarioRepo.atualizarUsuario(usuario);
         }
         return personal;
     }

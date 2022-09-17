@@ -9,5 +9,5 @@ public interface UsuarioRepository {
 
     Usuario salvarUsuario(Usuario usuario);
 
-    //Aluno atualizarAluno(Aluno aluno);
+    Usuario atualizarUsuario(Usuario usuario);
 }

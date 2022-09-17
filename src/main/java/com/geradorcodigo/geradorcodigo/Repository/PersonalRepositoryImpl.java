@@ -23,7 +23,7 @@ public class PersonalRepositoryImpl implements PersonalRepository{
     private static String SELECT_PERSONAL_ID = "select * from mc_personal where id = ?";
     private static String INSERT = " insert into mc_personal (id, nome, cpf, login, senha, sexo, idade, email, cref, foto) "
             + " values (nextval('mc_personal_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-    private static String UPDATE = " update mc_personal set nome = ? where id = ?";  
+    private static String UPDATE = " update mc_personal set foto = ? where id = ?";  
 
     @Autowired
     private JdbcTemplate jbdcTemplate;
@@ -65,7 +65,7 @@ public class PersonalRepositoryImpl implements PersonalRepository{
 
     public Personal atualizarPersonal(Personal personal) {
     
-        jbdcTemplate.update(UPDATE, new Object[] { personal.getNome(), personal.getId()});
+        jbdcTemplate.update(UPDATE, new Object[] { personal.getFoto(), personal.getId()});
 
         return personal; 
     }

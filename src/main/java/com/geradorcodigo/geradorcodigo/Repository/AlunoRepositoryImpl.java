@@ -29,7 +29,7 @@ public class AlunoRepositoryImpl implements AlunoRepository{
     "?";
     private static String INSERT = " insert into mc_aluno (id, nome, cpf, login, senha, sexo, idade, email, personal, foto) "
             + " values (nextval('mc_aluno_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-    //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
+    private static String UPDATE = " update mc_aluno set foto = ? where id = ?";  
 
     @Autowired
     private JdbcTemplate jbdcTemplate;
@@ -75,12 +75,12 @@ public class AlunoRepositoryImpl implements AlunoRepository{
         return aluno;
     }
 
-    /*public Aluno atualizarAluno(Aluno aluno) {
+    public Aluno atualizarAluno(Aluno aluno) {
     
-        jbdcTemplate.update(UPDATE, new Object[] { aluno.getVisto(), aluno.getId()});
+        jbdcTemplate.update(UPDATE, new Object[] { aluno.getFoto(), aluno.getId()});
 
         return aluno; 
-    }*/
+    }
 
     public Aluno obterAlunoPorId(int id) {
        

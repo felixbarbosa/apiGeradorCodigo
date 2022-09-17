@@ -22,16 +22,13 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
     private static String SELECT_USUARIO = "select * from mc_usuario where login = ? and senha = ?";
     private static String INSERT = " insert into mc_usuario (id, login, senha, pessoa, foto) "
             + " values (nextval('mc_usuario_id_seq'), ?, ?, ?, ?) ";
-    //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
+    private static String UPDATE = " update mc_usuario set foto = ? where pessoa = ?";  
 
     @Autowired
     private JdbcTemplate jbdcTemplate;
 
     @Autowired
     private PessoaRepository pessoaRepo;
-
-    @Autowired 
-    private JavaMailSender javaMailSender;
 
     
     public void setDataSource(DataSource dataSource){
@@ -42,47 +39,12 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
         jbdcTemplate.update(INSERT, new Object[] {usuario.getLogin(), usuario.getSenha(), usuario.getPessoa().getId(), usuario.getFoto()});
 
-        //SimpleEmail email = new SimpleEmail();
+        return usuario;
+    }
 
-        try{
+    public Usuario atualizarUsuario(Usuario usuario) {
 
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
- 
-            // Setting up necessary details
-            mailMessage.setFrom("musclefitnessmc@gmail.com");
-            mailMessage.setTo("vctrbrbs99@gmail.com");
-            mailMessage.setText("Teste de corpo de email");
-            mailMessage.setSubject("Teste de titulo de email");
-
-            System.out.println("Antes de enviar");
-
-            // Sending the mail
-            javaMailSender.send(mailMessage);
-            System.out.println("Enviou");
-
-        }catch(Exception e){
-            System.out.println("Deu erro: " + e.toString());
-        }
-
-        
-
-        /*email.setHostName("smtp.gmail.com");
-        email.setSmtpPort(465);
-        email.setAuthentication("musclefitnessmc@gmail.com", "cjbcgihubkxpziqh");
-        email.setSSLOnConnect(true);
-
-        try{
-            email.setFrom("musclefitnessmc@gmail.com");
-            email.setSubject("Muscle Fitness: Login e Senha");
-            email.setMsg("Teste de envio");
-            email.addTo("felix99.barbosa@gmail.com");
-            email.send();
-            System.out.println("Email enviado");
-        }catch(Exception erro){
-
-            System.out.println("Deu erro: " + erro.toString());
-
-        }*/
+        jbdcTemplate.update(UPDATE, new Object[] {usuario.getFoto(), usuario.getPessoa().getId()});
 
         return usuario;
     }
@@ -104,7 +66,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
                 if(rs.getInt("pessoa") == 0){
                     usuario.setPessoa(null);
                 }else{
-                    pessoa = pessoaRepo.obterPessoa(rs.getInt("pessoa"));
+                    pessoa = pessoaRepo.obterPessoaPorId(rs.getInt("pessoa"));
                     usuario.setPessoa(pessoa);
                 }
                 

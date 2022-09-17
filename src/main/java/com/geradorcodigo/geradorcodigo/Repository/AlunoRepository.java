@@ -12,5 +12,5 @@ public interface AlunoRepository {
 
     Aluno salvarAluno(Aluno aluno);
 
-    //Aluno atualizarAluno(Aluno aluno);
+    Aluno atualizarAluno(Aluno aluno);
 }

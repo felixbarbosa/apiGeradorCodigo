@@ -21,7 +21,7 @@ public class PessoaGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
 
     public Pessoa obterPessoa(int id){
 
-        Pessoa pessoa = pessoaRepo.obterPessoa(id);
+        Pessoa pessoa = pessoaRepo.obterPessoaPorId(id);
         return pessoa;    
     }
 

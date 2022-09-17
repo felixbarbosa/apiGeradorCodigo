@@ -3,7 +3,6 @@ package com.geradorcodigo.geradorcodigo.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,14 @@ public class PessoaRepositoryImpl implements PessoaRepository{
 
     private static String SELECT_PESSOA_ID = "select * from mc_pessoa where id = " +
     "?";
+    private static String SELECT_PESSOA_PERSONAL = "select * from mc_pessoa where personal = " +
+    "?";
+    private static String SELECT_PESSOA_ALUNO = "select * from mc_pessoa where aluno = " +
+    "?";
     private static String INSERT = " insert into mc_pessoa (id, nome, email, cref, cpf, aluno, personal) "
             + " values (nextval('mc_pessoa_id_seq'), ?, ?, ?, ?, ?, ?) ";
-    //private static String UPDATE = " update mc_aluno set nome = ? where id = ?";  
+
+    //private static String UPDATE = " update mc_pessoa set nome = ? where id = ?";  
 
     @Autowired
     private JdbcTemplate jbdcTemplate;
@@ -83,9 +87,85 @@ public class PessoaRepositoryImpl implements PessoaRepository{
         return pessoa;
     }
 
-    public Pessoa obterPessoa(int id) {
+    public Pessoa obterPessoaPorId(int id) {
        
         return jbdcTemplate.queryForObject(SELECT_PESSOA_ID, new Object[] {id}, new RowMapper<Pessoa>() {
+            @Override
+            public Pessoa mapRow(ResultSet rs, int rownumber) throws SQLException {
+                
+                Pessoa pessoa = new Pessoa();
+                Aluno aluno = new Aluno();
+                Personal personal = new Personal();
+
+                pessoa.setId(rs.getInt("id"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setEmail(rs.getString("email"));
+                pessoa.setCref(rs.getString("cref"));
+                pessoa.setCpf(rs.getString("cpf"));
+
+                if(rs.getInt("personal") == 0){
+                    pessoa.setPersonal(null);
+                }else{
+                    personal = personalRepo.obterPersonalPorId(rs.getInt("personal"));
+                    pessoa.setPersonal(personal);
+                }
+                
+                if(rs.getInt("aluno") == 0){
+                    pessoa.setAluno(null);
+                }else{
+                    aluno = alunoRepo.obterAlunoPorId(rs.getInt("aluno"));
+                    pessoa.setAluno(aluno);
+                }
+
+                
+
+                return pessoa;
+            }
+        });
+
+    }
+
+    public Pessoa obterPessoaPorPersonal(int personalId) {
+       
+        return jbdcTemplate.queryForObject(SELECT_PESSOA_PERSONAL, new Object[] {personalId}, new RowMapper<Pessoa>() {
+            @Override
+            public Pessoa mapRow(ResultSet rs, int rownumber) throws SQLException {
+                
+                Pessoa pessoa = new Pessoa();
+                Aluno aluno = new Aluno();
+                Personal personal = new Personal();
+
+                pessoa.setId(rs.getInt("id"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setEmail(rs.getString("email"));
+                pessoa.setCref(rs.getString("cref"));
+                pessoa.setCpf(rs.getString("cpf"));
+
+                if(rs.getInt("personal") == 0){
+                    pessoa.setPersonal(null);
+                }else{
+                    personal = personalRepo.obterPersonalPorId(rs.getInt("personal"));
+                    pessoa.setPersonal(personal);
+                }
+                
+                if(rs.getInt("aluno") == 0){
+                    pessoa.setAluno(null);
+                }else{
+                    aluno = alunoRepo.obterAlunoPorId(rs.getInt("aluno"));
+                    pessoa.setAluno(aluno);
+                }
+
+                
+
+                return pessoa;
+            }
+        });
+
+    }
+
+    public Pessoa obterPessoaPorAluno(int alunoId) {
+       
+        return jbdcTemplate.queryForObject(SELECT_PESSOA_ALUNO, new Object[] {alunoId}, new RowMapper<Pessoa>() {
             @Override
             public Pessoa mapRow(ResultSet rs, int rownumber) throws SQLException {
                 

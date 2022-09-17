@@ -3,9 +3,11 @@ import com.geradorcodigo.geradorcodigo.Model.Pessoa;
 
 public interface PessoaRepository {
 
-    Pessoa obterPessoa(int id);
+    Pessoa obterPessoaPorId(int id);
+
+    Pessoa obterPessoaPorPersonal(int personalId);
+
+    Pessoa obterPessoaPorAluno(int alunoId);
 
     Pessoa salvarPessoa(Pessoa pessoa);
-
-    //Aluno atualizarAluno(Aluno aluno);
 }
