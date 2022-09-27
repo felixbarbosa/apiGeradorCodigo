@@ -34,9 +34,9 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         return lista;    
     }
 
-    public List<Treino> obterTreinoAlunoPorDia(int alunoId, int diaSemanaId){
+    public List<Treino> obterTreinoAlunoPorDia(int alunoId, int diaSemanaId, String nomeTreino){
 
-        List<Treino> lista = treinoRepo.obterTreinoAlunoPorDia(alunoId, diaSemanaId);
+        List<Treino> lista = treinoRepo.obterTreinoAlunoPorDia(alunoId, diaSemanaId, nomeTreino);
         return lista;    
     }
 
@@ -46,9 +46,9 @@ public class TreinoGraphQl implements GraphQLQueryResolver, GraphQLMutationResol
         return lista;    
     }
 
-    public List<Treino> obterTreinoAlunoPorMusculo(int alunoId, int musculoId){
+    public List<Treino> obterTreinoAlunoPorMusculo(int alunoId, int musculoId, String nomeTreino){
 
-        List<Treino> lista = treinoRepo.obterTreinoAlunoPorMusculo(alunoId, musculoId);
+        List<Treino> lista = treinoRepo.obterTreinoAlunoPorMusculo(alunoId, musculoId, nomeTreino);
         return lista;    
     }
 

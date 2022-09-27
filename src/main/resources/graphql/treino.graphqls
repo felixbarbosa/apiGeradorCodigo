@@ -24,9 +24,9 @@ input TreinoInput {
 }
 extend type Query {
         obterTreinoAluno(alunoId: Int!):[Treino]!
-        obterTreinoAlunoPorDia(alunoId: Int!, diaSemanaId: Int!):[Treino]!
+        obterTreinoAlunoPorDia(alunoId: Int!, diaSemanaId: Int!, nomeTreino: String!):[Treino]!
         obterTreinoNomeAluno(alunoId: Int!, diaSemanaId: Int!):[Treino]!
-        obterTreinoAlunoPorMusculo(alunoId: Int!, musculoId: Int!):[Treino]!
+        obterTreinoAlunoPorMusculo(alunoId: Int!, musculoId: Int!, nomeTreino: String!):[Treino]!
         obterTreinoAlunoNome(alunoId: Int!, nome: String!):[Treino]!
 }
 

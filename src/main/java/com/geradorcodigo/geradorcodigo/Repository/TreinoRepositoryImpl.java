@@ -41,7 +41,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "inner join mc_aluno on mc_treino.aluno = mc_aluno.id "
     + "inner join mc_exercicio on mc_treino.exercicio = mc_exercicio.id "
     + "inner join mc_dia_semana on mc_treino.\"diaSemana\" = mc_dia_semana.id "
-    + "where mc_dia_semana.id = ? and mc_aluno.id = ? order by musculoAlvo";
+    + "where mc_dia_semana.id = ? and mc_aluno.id = ? and mc_treino.nome = ? order by musculoAlvo";
 
     private static String SELECT_TREINO_NOME_ALUNO = "select mc_treino.nome from mc_treino "
     + "inner join mc_musculo on mc_treino.musculo = mc_musculo.id "
@@ -58,7 +58,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
     + "inner join mc_aluno on mc_treino.aluno = mc_aluno.id "
     + "inner join mc_exercicio on mc_treino.exercicio = mc_exercicio.id "
     + "inner join mc_dia_semana on mc_treino.\"diaSemana\" = mc_dia_semana.id "
-    + "where mc_musculo.id = ? and mc_aluno.id = ?";
+    + "where mc_musculo.id = ? and mc_aluno.id = ? and mc_treino.nome = ?";
 
     private static String INSERT = "insert into mc_treino (nome, exercicio, aluno, repeticoes, velocidade, "
             + "descanso, musculo, \"diaSemana\", series) "
@@ -138,7 +138,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
         }, alunoId, nome);
     }
 
-    public List<Treino> obterTreinoAlunoPorDia(int alunoId, int diaSemanaId){
+    public List<Treino> obterTreinoAlunoPorDia(int alunoId, int diaSemanaId, String nomeTreino){
         
         return jbdcTemplate.query(SELECT_TREINO_POR_DIA_ALUNO, new RowMapper<Treino>(){
 
@@ -168,7 +168,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 return treino;
 
             }
-        }, diaSemanaId, alunoId);
+        }, diaSemanaId, alunoId, nomeTreino);
     }
 
     public List<Treino> obterTreinoNomeAluno(int alunoId, int diaSemanaId){
@@ -188,7 +188,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
         }, diaSemanaId, alunoId);
     }
 
-    public List<Treino> obterTreinoAlunoPorMusculo(int alunoId, int musculoId){
+    public List<Treino> obterTreinoAlunoPorMusculo(int alunoId, int musculoId, String nomeTreino){
         
         return jbdcTemplate.query(SELECT_TREINO_POR_MUSCULO, new RowMapper<Treino>(){
 
@@ -216,7 +216,7 @@ public class TreinoRepositoryImpl implements TreinoRepository{
                 return treino;
 
             }
-        }, musculoId, alunoId);
+        }, musculoId, alunoId, nomeTreino);
     }
      
 }
