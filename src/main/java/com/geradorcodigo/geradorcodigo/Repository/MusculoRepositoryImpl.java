@@ -43,6 +43,7 @@ public class MusculoRepositoryImpl implements MusculoRepository{
                 Musculo musculo = new Musculo();
                 musculo.setId(rs.getInt("id"));
                 musculo.setDescricao(rs.getString("descricao"));
+                musculo.setImagem(rs.getString("imagem"));
                 
                 return musculo;
 
@@ -60,6 +61,7 @@ public class MusculoRepositoryImpl implements MusculoRepository{
 
                 musculo.setId(rs.getInt("id"));
                 musculo.setDescricao(rs.getString("descricao"));
+                musculo.setImagem(rs.getString("imagem"));
 
                 return musculo;
             }

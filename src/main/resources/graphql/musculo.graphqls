@@ -1,6 +1,7 @@
 type Musculo {
         id: Int!,
         descricao: String!,
+        imagem: String
 }
 input MusculoInput {
         id: Int!,
